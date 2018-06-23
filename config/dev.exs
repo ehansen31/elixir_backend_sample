@@ -49,6 +49,7 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
+config :elixir_backend_sample, :db, name: "my_mongo_dev"
 # config :elixir_backend_sample, ElixirBackendSample.Repo,
 #   adapter: Ecto.Adapters.Postgres,
 #   username: "postgres",
