@@ -1,11 +1,11 @@
-defmodule ElixirBackendSample.Repo do
-  use Ecto.Repo, otp_app: :elixir_backend_sample
+# defmodule ElixirBackendSample.Repo do
+#   use Ecto.Repo, otp_app: :elixir_backend_sample
 
-  @doc """
-  Dynamically loads the repository url from the
-  DATABASE_URL environment variable.
-  """
-  def init(_, opts) do
-    {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
-  end
-end
+#   @doc """
+#   Dynamically loads the repository url from the
+#   DATABASE_URL environment variable.
+#   """
+#   def init(_, opts) do
+#     {:ok, Keyword.put(opts, :url, System.get_env("DATABASE_URL"))}
+#   end
+# end

@@ -9,13 +9,13 @@ defmodule ElixirBackendSample.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(ElixirBackendSample.Repo, []),
+      # supervisor(ElixirBackendSample.Repo, []),
       # Start the endpoint when the application starts
       supervisor(ElixirBackendSampleWeb.Endpoint, []),
       # Start your own worker by calling: ElixirBackendSample.Worker.start_link(arg1, arg2, arg3)
       # worker(ElixirBackendSample.Worker, [arg1, arg2, arg3]),
-      worker(Mongo, [[database:
-      Application.get_env(:my_app, :db)[:name], name: :mongo]])
+      # worker(Mongo, [[database:
+      # Application.get_env(:my_app, :db)[:name], name: :mongo]])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

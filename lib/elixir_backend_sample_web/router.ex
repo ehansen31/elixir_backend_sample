@@ -19,6 +19,13 @@ defmodule ElixirBackendSampleWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/test", ElixirBackendSampleWeb do
+    pipe_through :api
+
+    get "/", TestController, only: [:create]
+  end
+
+
   # Other scopes may use custom stacks.
   # scope "/api", ElixirBackendSampleWeb do
   #   pipe_through :api
