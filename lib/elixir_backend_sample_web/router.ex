@@ -17,14 +17,10 @@ defmodule ElixirBackendSampleWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-  end
 
-  scope "/test", ElixirBackendSampleWeb do
     pipe_through :api
-
-    get "/", TestController, only: [:create]
+    get "/test", TestController, :create
   end
-
 
   # Other scopes may use custom stacks.
   # scope "/api", ElixirBackendSampleWeb do
