@@ -19,7 +19,13 @@ defmodule ElixirBackendSampleWeb.Router do
     get "/", PageController, :index
 
     pipe_through :api
-    get "/test", TestController, :create
+    get "/test", TestController, :return
+    post "/", GraphQlController, :data
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Schema
+
+  forward "/", Absinthe.Plug,
+    schema: Schema
   end
 
   # Other scopes may use custom stacks.
