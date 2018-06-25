@@ -8,6 +8,7 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
       add(:first_name, :string)
       add(:last_name, :string)
       add(:age, :integer)
+      create unique_index(:users, [:email])
     end
   end
 end
