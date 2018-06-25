@@ -15,4 +15,11 @@ defmodule ElixirBackendSampleWeb.Models.User do
     field(:last_name, :string)
     field(:age, :integer)
   end
+
+  def create_user(userObj) do
+    # check if the email exists in the database?
+
+    person = %ElixirBackendSampleWeb.Models.User{}
+    ElixirBackendSample.Repo.insert(person)
+  end
 end

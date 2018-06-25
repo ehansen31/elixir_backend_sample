@@ -13,5 +13,6 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     field(:password, :string)
     field(:first_name, :string)
     field(:last_name, :string)
+    field(:age, :integer)
   end
 end
