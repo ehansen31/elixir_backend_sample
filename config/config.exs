@@ -12,7 +12,7 @@ config :elixir_backend_sample,
 # Configures the endpoint
 config :elixir_backend_sample, ElixirBackendSampleWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "EZguNC9m2ti2NMCgSl64P6f56enQy7BoIr07lAtIC3yO92gi1EruXx/zuBBKEI66",
+  secret_key_base: "XajLnAZL5zZ1gLGsl3LhaA0P6CnFQeVwSd0hUSUWqzGpYtQXCy5iErHy4PQaKx6g",
   render_errors: [view: ElixirBackendSampleWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: ElixirBackendSample.PubSub,
            adapter: Phoenix.PubSub.PG2]

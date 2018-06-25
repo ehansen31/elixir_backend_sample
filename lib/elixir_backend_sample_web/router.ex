@@ -2,34 +2,33 @@ defmodule ElixirBackendSampleWeb.Router do
   use ElixirBackendSampleWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_flash)
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", ElixirBackendSampleWeb do
-    pipe_through :browser # Use the default browser stack
+    # Use the default browser stack
+    pipe_through(:browser)
 
-    get "/", PageController, :index
-
-    pipe_through :api
-    get "/test", TestController, :return
-    post "/", GraphQlController, :data
-    forward "/graphiql", Absinthe.Plug.GraphiQL,
-    schema: Schema
-
-  forward "/", Absinthe.Plug,
-    schema: Schema
+    get("/", PageController, :index)
   end
 
   # Other scopes may use custom stacks.
   # scope "/api", ElixirBackendSampleWeb do
   #   pipe_through :api
   # end
+  # Other scopes may use custom stacks.
+  scope "/api" do
+    pipe_through(:api)
+    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: ElixirBackendSampleWeb.Schema)
+
+    forward("/", Absinthe.Plug, schema: ElixirBackendSampleWeb.Schema)
+  end
 end

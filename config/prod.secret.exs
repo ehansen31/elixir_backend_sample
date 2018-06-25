@@ -9,7 +9,7 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 config :elixir_backend_sample, ElixirBackendSampleWeb.Endpoint,
-  secret_key_base: "nYYwCDpez3KTL8WRj0lDUflZdWHuyesZwSnuT+89qX0VyAnOsRE7voNYvxufZPDl"
+  secret_key_base: "U6STZZBPxHf0X4LS+xgC07Yfh3iuyrKUk/7PqCZKZdSUCqMNkSC/7rD6ks17YR+C"
 
 # Configure your database
 config :elixir_backend_sample, ElixirBackendSample.Repo,

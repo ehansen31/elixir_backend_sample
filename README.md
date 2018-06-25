@@ -1,9 +1,5 @@
 # ElixirBackendSample
 
-### A project to learn elixir with phoenix, ecto, and absinthe. 
-#### create a restful api in functional programming language that leverages nosql mongodb and graphql.
-
-======
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

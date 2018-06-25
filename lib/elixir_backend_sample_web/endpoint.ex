@@ -35,7 +35,7 @@ defmodule ElixirBackendSampleWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_elixir_backend_sample_key",
-    signing_salt: "Un258f2I"
+    signing_salt: "UApvRCZe"
 
   plug ElixirBackendSampleWeb.Router
 
