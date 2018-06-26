@@ -4,6 +4,8 @@ defmodule ElixirBackendSampleWeb.Models.User do
   import Ecto.Changeset
   import Ecto.Query
 
+  alias ElixirBackendSample.Repo
+
   schema "users" do
     field(:email, :string)
     field(:password, :string)
@@ -19,5 +21,6 @@ defmodule ElixirBackendSampleWeb.Models.User do
     |> validate_format(:email, ~r/@/)
     |> validate_inclusion(:age, 18..100)
     |> unique_constraint(:email)
+    # |> unsafe_validate_unique(:email, Repo)
   end
 end

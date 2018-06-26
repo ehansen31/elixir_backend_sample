@@ -4,6 +4,29 @@ defmodule ElixirBackendSampleWeb.Schema do
 
   alias ElixirBackendSampleWeb.Resolvers
 
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  def format_changeset(changeset) do
+    # {:error, [email: {"has already been taken", []}]}
+    errors =
+      changeset.errors
+      |> Enum.map(fn {key, {value, context}} ->
+        [message: "#{key} #{value}", details: context]
+      end)
+
+    {:error, errors}
+  end
+
+  def handle_errors(fun) do
+    fn source, args, info ->
+      case Absinthe.Resolution.call(fun, source, args, info) do
+        {:error, %Ecto.Changeset{} = changeset} -> format_changeset(changeset)
+        val -> val
+      end
+    end
+  end
+
   query do
     @desc "Get all posts"
     field :posts, list_of(:post) do
@@ -19,7 +42,7 @@ defmodule ElixirBackendSampleWeb.Schema do
         arg(:last_name, :string)
         arg(:age, :integer)
 
-        resolve(&Resolvers.User.create_user/3)
+        resolve handle_errors(&Resolvers.User.create_user/3)
       end
     end
   end
