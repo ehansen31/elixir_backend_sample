@@ -4,15 +4,22 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
     alias ElixirBackendSample.Repo
 
     changeset = User.changeset(%User{}, args)
-    case Repo.insert(changeset) do
-      {:error, changeset}->{:error, changeset}
-      {:ok, userObj}->{:ok, userObj}
-    end
 
+    case Repo.insert(changeset) do
+      {:error, changeset} -> {:error, changeset}
+      {:ok, userObj} -> {:ok, userObj}
+    end
 
     # %User{}
     # |> User.changeset(args)
     # |> Repo.insert()
+  end
+
+  def login(_parent, args, _resolution) do
+    alias ElixirBackendSampleWeb.Models.User
+    alias ElixirBackendSample.Repo
+
+    User.login(args)
   end
 
   def create_post(_parent, args, %{context: %{current_user: user}}) do

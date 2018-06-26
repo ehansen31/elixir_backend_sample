@@ -33,9 +33,17 @@ defmodule ElixirBackendSampleWeb.Schema do
       resolve(&Resolvers.Content.list_posts/3)
     end
 
+    @desc "Login and return token"
+    field :login, :string do
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+
+      resolve(&Resolvers.User.login/3)
+    end
+
     mutation do
       @desc "Create a user"
-      field :create_user, type: :post do
+      field :create_user, type: :user do
         arg(:email, non_null(:string))
         arg(:password, non_null(:string))
         arg(:first_name, :string)
