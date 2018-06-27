@@ -3,6 +3,9 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
     alias ElixirBackendSampleWeb.Models.User
     alias ElixirBackendSample.Repo
 
+    args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))
+    args = Map.delete(args, :password)
+
     changeset = User.changeset(%User{}, args)
 
     case Repo.insert(changeset) do
