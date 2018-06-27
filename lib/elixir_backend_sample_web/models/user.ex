@@ -22,6 +22,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
     # |> validate_length(:password, min: 5, max: 10)
     # |> validate_inclusion(:age, 18..100)
     |> unique_constraint(:email)
+
     # |> put_password_hash()
 
     # |> unsafe_validate_unique(:email, Repo)
@@ -40,43 +41,31 @@ defmodule ElixirBackendSampleWeb.Models.User do
     Repo.one(query)
   end
 
-  def authenticate_user(email, given_password) do
-    query = Ecto.Query.from(u in User, where: u.email == ^email)
+  defp authenticate_user(email, given_password) do
+    query = Ecto.Query.from(u in ElixirBackendSampleWeb.Models.User, where: u.email == ^email)
 
     Repo.one(query)
     |> check_password(given_password)
   end
 
-  defp check_password(nil, _), do: {:error, "Incorrect username or password"}
+  defp check_password(nil, _), do: {:error, "Email is not registered"}
 
   defp check_password(user, given_password) do
-    case Bcrypt.checkpw(given_password, user.password_hash) do
+    case Comeonin.Bcrypt.checkpw(given_password, user.password_hash) do
       true -> {:ok, user}
-      false -> {:error, "Incorrect username or password"}
+      false -> {:error, "Incorrect password"}
     end
   end
 
   def login(args) do
-    query =
-      from(
-        u in "users",
-        where: u.email == ^args.email
-      )
-
-    case Repo.one(query) do
-      {:ok, value} ->
-        case authenticate_user(args.email, args.password) do
-          {:ok, user} ->
-            case ElixirBackendSample.Auth.Guardian.encode_and_sign(user) do
-              {:ok, token, _claims} -> {:ok, token}
-            end
-
-          {:error, _reason} ->
-            {:error, "Invalid Password"}
+    case authenticate_user(args.email, args.password) do
+      {:ok, user} ->
+        case ElixirBackendSample.Auth.Guardian.encode_and_sign(user) do
+          {:ok, token, _claims} -> {:ok, token}
         end
 
       {:error, _reason} ->
-        {:error, "Email is not registered"}
+        {:error, "Invalid Password"}
     end
   end
 end

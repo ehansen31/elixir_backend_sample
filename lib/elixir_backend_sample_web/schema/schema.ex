@@ -40,18 +40,18 @@ defmodule ElixirBackendSampleWeb.Schema do
 
       resolve(&Resolvers.User.login/3)
     end
+  end
+  
+  mutation do
+    @desc "Create a user"
+    field :create_user, type: :user do
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+      arg(:first_name, :string)
+      arg(:last_name, :string)
+      arg(:age, :integer)
 
-    mutation do
-      @desc "Create a user"
-      field :create_user, type: :user do
-        arg(:email, non_null(:string))
-        arg(:password, non_null(:string))
-        arg(:first_name, :string)
-        arg(:last_name, :string)
-        arg(:age, :integer)
-
-        resolve handle_errors(&Resolvers.User.create_user/3)
-      end
+      resolve handle_errors(&Resolvers.User.create_user/3)
     end
   end
 end
