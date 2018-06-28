@@ -20,16 +20,19 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
 
   def login(_parent, args, _resolution) do
     alias ElixirBackendSampleWeb.Models.User
-    alias ElixirBackendSample.Repo
 
     User.login(args)
   end
 
-  def create_post(_parent, args, %{context: %{current_user: user}}) do
-    Blog.Content.create_post(user, args)
+  def is_logged(_parent, _args, %{context: %{current_user: _current_user}}) do
+    {:ok, true}
   end
 
-  def create_post(_parent, _args, _resolution) do
-    {:error, "Access denied"}
+  def is_logged(_parent, _args, _resolution) do
+    {:error, false}
+  end
+
+  def update(_args, _info) do
+    {:error, "Not Authorized"}
   end
 end

@@ -9,15 +9,16 @@ defmodule ElixirBackendSampleWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
-  pipeline :api do
-    plug(:accepts, ["json"])
-  end
-
   scope "/", ElixirBackendSampleWeb do
     # Use the default browser stack
     pipe_through(:browser)
 
     get("/", PageController, :index)
+  end
+
+  pipeline :api do
+    plug(:accepts, ["json"])
+    plug(ElixirBackendSampleWeb.Context)
   end
 
   # Other scopes may use custom stacks.

@@ -28,9 +28,16 @@ defmodule ElixirBackendSampleWeb.Schema do
   end
 
   query do
-    @desc "Get all posts"
-    field :posts, list_of(:post) do
-      resolve(&Resolvers.Content.list_posts/3)
+    # @desc "Get all posts"
+    # field :posts, list_of(:post) do
+    #   resolve(&Resolvers.Content.list_posts/3)
+    # end
+
+    @desc "Get user by id"
+    field :get_user_by_id, :integer do
+      arg(:id, non_null(:integer))
+
+      resolve(&Resolvers.User.login/3)
     end
 
     @desc "Login and return token"
@@ -40,8 +47,13 @@ defmodule ElixirBackendSampleWeb.Schema do
 
       resolve(&Resolvers.User.login/3)
     end
+
+    @desc "Is the user logged in"
+    field :is_logged, :boolean do
+      resolve(&Resolvers.User.is_logged/3)
+    end
   end
-  
+
   mutation do
     @desc "Create a user"
     field :create_user, type: :user do
@@ -51,7 +63,7 @@ defmodule ElixirBackendSampleWeb.Schema do
       arg(:last_name, :string)
       arg(:age, :integer)
 
-      resolve handle_errors(&Resolvers.User.create_user/3)
+      resolve(handle_errors(&Resolvers.User.create_user/3))
     end
   end
 end
