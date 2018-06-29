@@ -32,7 +32,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
     # Create a query
     query =
       from(
-        u in "users",
+        u in ElixirBackendSampleWeb.Models.User,
         where: u.id == ^id
       )
 

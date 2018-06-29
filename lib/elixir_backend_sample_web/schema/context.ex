@@ -2,7 +2,7 @@ defmodule ElixirBackendSampleWeb.Context do
   @behaviour Plug
 
   import Plug.Conn
-  import Ecto.Query, only: [where: 2]
+  import Ecto.Query
 
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Models.User
