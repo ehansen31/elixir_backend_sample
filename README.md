@@ -1,5 +1,27 @@
 # ElixirBackendSample
 
+Sample project to be used going forward as a baseline api for quick POC's and other projects that involve rapid prototyping. Designed to be forked so that business logic can be immediately written into the codebase with the boilerplate complete. Could also serve as a hackthon boilerplate. Intended to kickstart the consulting + dev shop work I would like to be involved with in the future.
+
+
+##Features include:
+* Elixir functional programming language
+* Phoenix web server and framework
+* Absinthe GraphQL library
+* ecto + postgrex for data models, migrations, and seeds
+* Guardian user token creation and validation through _authorization_ header in api requests
+* Password hashing into database via comeonin + bcrypt
+* bamboo for password recovery emails
+
+
+###Future:
+* docker deployment + scripts
+* aws deployment script
+
+
+---
+---
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
