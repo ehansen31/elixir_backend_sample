@@ -16,7 +16,7 @@ Sample project to be used going forward as a baseline api for quick POC's and ot
 ### Future:
 * docker deployment + scripts
 * aws deployment script
-
+* unit testing + test driven development baked in
 
 ---
 ---
