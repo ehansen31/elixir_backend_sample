@@ -5,6 +5,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
   import Ecto.Query
 
   alias ElixirBackendSample.Repo
+  alias ElixirBackendSampleWeb.Email
 
   schema "users" do
     field(:email, :string)
@@ -75,6 +76,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
     cond Repo.all(query) do
       {nil}->{:error, "Email not found"}
+      {user}-> user = user
     end
 
     # set password to random string
@@ -86,14 +88,6 @@ defmodule ElixirBackendSampleWeb.Models.User do
       {:error, changeset} -> # Something went wrong
     end
 
-    # email the new password to the user
-    new_email(
-      to: "john@gmail.com",
-      from: "support@myapp.com",
-      subject: "Welcome to the app.",
-      html_body: "<strong>Thanks for joining!</strong>",
-      text_body: "Thanks for joining!"
-    )
-
+    Email.password_reset_email(user, new_password) |> ElixirBackendSample.Mailer.deliver_later
   end
 end
