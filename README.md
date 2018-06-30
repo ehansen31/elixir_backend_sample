@@ -11,12 +11,13 @@ Sample project to be used going forward as a baseline api for quick POC's and ot
 * Guardian user token creation and validation through _authorization_ header in api requests
 * Password hashing into database via comeonin + bcrypt
 * bamboo for password recovery emails
+* unit testing + test driven development ready
 
 
 ### Future:
 * docker deployment + scripts
 * aws deployment script
-* unit testing + test driven development baked in
+
 
 ---
 ---

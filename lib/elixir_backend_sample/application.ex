@@ -11,7 +11,7 @@ defmodule ElixirBackendSample.Application do
       # Start the Ecto repository
       supervisor(ElixirBackendSample.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(ElixirBackendSampleWeb.Endpoint, []),
+      supervisor(ElixirBackendSampleWeb.Endpoint, [])
       # Start your own worker by calling: ElixirBackendSample.Worker.start_link(arg1, arg2, arg3)
       # worker(ElixirBackendSample.Worker, [arg1, arg2, arg3]),
     ]

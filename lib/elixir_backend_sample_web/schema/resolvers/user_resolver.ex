@@ -32,6 +32,12 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
     {:error, false}
   end
 
+  def reset_password(_parent, args, _resolution) do
+    alias ElixirBackendSampleWeb.Models.User
+
+    User.reset_password(args)
+  end
+
   def update(_args, _info) do
     {:error, "Not Authorized"}
   end

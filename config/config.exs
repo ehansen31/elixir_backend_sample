@@ -14,8 +14,7 @@ config :elixir_backend_sample, ElixirBackendSampleWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "XajLnAZL5zZ1gLGsl3LhaA0P6CnFQeVwSd0hUSUWqzGpYtQXCy5iErHy4PQaKx6g",
   render_errors: [view: ElixirBackendSampleWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: ElixirBackendSample.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: ElixirBackendSample.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -29,4 +28,4 @@ config :elixirbackendsample, ElixirBackendSample.Auth.Guardian,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

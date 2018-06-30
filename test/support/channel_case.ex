@@ -25,13 +25,13 @@ defmodule ElixirBackendSampleWeb.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirBackendSample.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(ElixirBackendSample.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end
