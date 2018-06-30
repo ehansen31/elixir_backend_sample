@@ -67,7 +67,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
 
       query_reset_password = """
         mutation resetUserPassword{
-            resetUsePassword(email:"e.hansen31@live.com"){
+            resetUserPassword(email:"e.hansen31@live.com"){
           }
         }          
       """
@@ -79,6 +79,8 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
 
       IO.inspect(res.resp_body)
       assert json_response(res, 200)
+
+      # assert_delivered_email MyApp.Email.welcome_email(user)
     end
   end
 end

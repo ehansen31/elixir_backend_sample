@@ -20,7 +20,8 @@ defmodule ElixirBackendSample.Mixfile do
   def application do
     [
       mod: {ElixirBackendSample.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
+      applications: [:bamboo, :bamboo_smtp]
     ]
   end
 
@@ -46,7 +47,8 @@ defmodule ElixirBackendSample.Mixfile do
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:bamboo, "~> 1.0"}
+      {:bamboo, "~> 1.0"},
+      {:bamboo_smtp, "~> 1.5.0"}
     ]
   end
 

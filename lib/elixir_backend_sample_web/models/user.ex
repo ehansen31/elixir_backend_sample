@@ -71,8 +71,22 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   def reset_password(args) do
     
-    
+    query = Ecto.Query.from(u in ElixirBackendSampleWeb.Models.User, where: u.email == ^args.email)
 
+    cond Repo.all(query) do
+      {nil}->{:error, "Email not found"}
+    end
+
+    # set password to random string
+    new_password = :crypto.strong_rand_bytes(12) |> Base.url_encode64 |> binary_part(0, length)
+
+    # save the new password to the database
+    post = Ecto.Changeset.change post, title: "New title"
+    cond Repo.update post do
+      {:error, changeset} -> # Something went wrong
+    end
+
+    # email the new password to the user
     new_email(
       to: "john@gmail.com",
       from: "support@myapp.com",

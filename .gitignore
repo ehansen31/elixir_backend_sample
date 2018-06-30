@@ -2,3 +2,4 @@ deps
 _build
 assets
 .elixir_ls
+priv/static/smtp_credentials.csv
