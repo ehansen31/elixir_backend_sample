@@ -32,6 +32,8 @@ defmodule ElixirBackendSample.DataCase do
       Ecto.Adapters.SQL.Sandbox.mode(ElixirBackendSample.Repo, {:shared, self()})
     end
 
+      
+
     :ok
   end
 

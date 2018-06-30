@@ -2,7 +2,6 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
-    drop(table(:users))
 
     create table(:users) do
       add(:email, :string)
