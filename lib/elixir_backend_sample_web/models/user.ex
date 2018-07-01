@@ -74,20 +74,21 @@ defmodule ElixirBackendSampleWeb.Models.User do
     
     query = Ecto.Query.from(u in ElixirBackendSampleWeb.Models.User, where: u.email == ^args.email)
 
-    cond Repo.all(query) do
-      {nil}->{:error, "Email not found"}
-      {user}-> user = user
-    end
+    user = Repo.one(query)
 
     # set password to random string
-    new_password = :crypto.strong_rand_bytes(12) |> Base.url_encode64 |> binary_part(0, length)
+    new_password = :crypto.strong_rand_bytes(12) |> Base.url_encode64 |> binary_part(0, 12)
 
-    # save the new password to the database
-    post = Ecto.Changeset.change post, title: "New title"
-    cond Repo.update post do
-      {:error, changeset} -> # Something went wrong
+    hashed_password = Comeonin.Bcrypt.hashpwsalt(new_password)
+
+    user = Ecto.Changeset.change user, password_hash: hashed_password
+    case Repo.update user do
+      {:error, changeset} -> {:error, "error updating user"}
+      {:ok, changeset} -> {:ok, "success"}
     end
 
     Email.password_reset_email(user, new_password) |> ElixirBackendSample.Mailer.deliver_later
+
+    {:ok, "success"}
   end
 end

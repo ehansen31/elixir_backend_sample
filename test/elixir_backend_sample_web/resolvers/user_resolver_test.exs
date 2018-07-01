@@ -68,7 +68,8 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       query_reset_password = """
         mutation resetUserPassword{
             resetUserPassword(email:"e.hansen31@live.com"){
-          }
+              
+            }
         }          
       """
 
