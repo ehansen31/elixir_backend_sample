@@ -62,3 +62,6 @@ config :elixir_backend_sample, ElixirBackendSample.Repo,
   database: "elixir_backend_sample_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :elixirbackendsample, ElixirBackendSample.Mailer,
+  adapter: Bamboo.LocalAdapter

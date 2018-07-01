@@ -17,3 +17,6 @@ config :elixir_backend_sample, ElixirBackendSample.Repo,
   database: "elixir_backend_sample_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :elixirbackendsample, ElixirBackendSample.Mailer,
+  adapter: Bamboo.TestAdapter

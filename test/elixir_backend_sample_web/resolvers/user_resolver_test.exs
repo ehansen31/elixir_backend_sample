@@ -1,5 +1,6 @@
 defmodule ElixirBackendSampleWeb.UserResolverTest do
   use ElixirBackendSampleWeb.ConnCase
+  use Bamboo.Test
   # alias ElixirBackendSampleWeb.Models.User
   require Logger
   @user %{email: "some body", password: true, faved: true, title: "some title"}
@@ -67,10 +68,8 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
 
       query_reset_password = """
         mutation resetUserPassword{
-            resetUserPassword(email:"e.hansen31@live.com"){
-              
-            }
-        }          
+            resetUserPassword(email:"e.hansen31@live.com")
+        }
       """
 
       res =
@@ -79,9 +78,16 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
         |> post("/api", query_reset_password)
 
       IO.inspect(res.resp_body)
-      assert json_response(res, 200)
+      assert json_response(res, 200)["data"]["resetUserPassword"]
 
       # assert_delivered_email MyApp.Email.welcome_email(user)
+      user = %{email: "e.hansen31@live.com"}
+      email = ElixirBackendSampleWeb.Email.password_reset_email(user, "password")
+
+      email |> ElixirBackendSample.Mailer.deliver_now
+
+      # Works with deliver_now and deliver_later
+      assert_delivered_email email
     end
   end
 end

@@ -7,7 +7,7 @@ defmodule ElixirBackendSampleWeb.Email do
         from: "noreply@murmillosoftware.com",
         subject: "Your New Password",
         # html_body: "<strong>Thanks for joining!</strong>",
-        text_body: "Your new password is: " + new_password
+        text_body: "Your new password is: " <> new_password
       )
     end
   end

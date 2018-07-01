@@ -72,7 +72,7 @@ defmodule ElixirBackendSampleWeb.Schema do
     end
 
     @desc "Reset user password via email"
-    field :reset_user_password, type: :user do
+    field :reset_user_password, type: :string do
       arg(:email, non_null(:string))
 
       resolve(handle_errors(&Resolvers.User.reset_password/3))

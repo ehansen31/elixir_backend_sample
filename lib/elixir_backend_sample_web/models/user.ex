@@ -84,7 +84,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
     user = Ecto.Changeset.change user, password_hash: hashed_password
     case Repo.update user do
       {:error, changeset} -> {:error, "error updating user"}
-      {:ok, changeset} -> {:ok, "success"}
+      {:ok, changeset} -> user = changeset
     end
 
     Email.password_reset_email(user, new_password) |> ElixirBackendSample.Mailer.deliver_later
