@@ -83,7 +83,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
     user = Ecto.Changeset.change user, password_hash: hashed_password
     case Repo.update user do
-      {:error, changeset} -> {:error, "error updating user"}
+      {:error, changeset} -> {:error, changeset}
       {:ok, changeset} -> user = changeset
     end
 
@@ -97,7 +97,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
     updated_user = Ecto.Changeset.change(user, args)
 
     case Repo.update updated_user do
-      {:error, changeset} -> {:error, "error updating user"}
+      {:error, changeset} -> {:error, changeset}
       {:ok, changeset} -> {:ok, changeset}
     end
 
