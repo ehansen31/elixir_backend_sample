@@ -38,6 +38,22 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
     User.reset_password(args)
   end
 
+  def update_user(_parent, args, %{context: %{current_user: current_user}}) do
+    alias ElixirBackendSampleWeb.Models.User
+
+    cond do
+      args.password != nil ->
+        args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))
+        args = Map.delete(args, :password)
+    end
+
+    User.update_user(current_user, args)
+  end
+
+  def update_user(_parent, args, _resolution) do
+    {:error, "invalid user token"}
+  end
+
   def update(_args, _info) do
     {:error, "Not Authorized"}
   end

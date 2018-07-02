@@ -91,4 +91,15 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
     {:ok, "success"}
   end
+
+  def update_user(user, args) do
+    
+    updated_user = Ecto.Changeset.change(user, args)
+
+    case Repo.update updated_user do
+      {:error, changeset} -> {:error, "error updating user"}
+      {:ok, changeset} -> {:ok, changeset}
+    end
+
+  end
 end
