@@ -1,7 +1,7 @@
 defmodule ElixirBackendSample.Auth.Guardian do
   @moduledoc false
 
-  use Guardian, otp_app: :elixirbackendsample
+  use Guardian, otp_app: :elixir_backend_sample
 
   alias ElixirBackendSampleWeb.Models.User
 

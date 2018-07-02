@@ -22,7 +22,7 @@ config :logger, :console,
   metadata: [:user_id]
 
 # Configures Guardian
-config :elixirbackendsample, ElixirBackendSample.Auth.Guardian,
+config :elixir_backend_sample, ElixirBackendSample.Auth.Guardian,
   issuer: "elixirbackendsample",
   secret_key: "HNinpKh9Ne3tr8BpjCpAEh0xzCqTIG3PWsfkR2AtzvUaRIpbs6oIQ9RcmjmGPekJ"
 

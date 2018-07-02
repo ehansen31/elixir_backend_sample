@@ -20,8 +20,7 @@ defmodule ElixirBackendSample.Mixfile do
   def application do
     [
       mod: {ElixirBackendSample.Application, []},
-      extra_applications: [:logger, :runtime_tools],
-      applications: [:bamboo, :bamboo_smtp]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp]
     ]
   end
 
