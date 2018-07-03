@@ -3,3 +3,8 @@ _build
 assets
 .elixir_ls
 priv/static/smtp_credentials.csv
+
+# Elastic Beanstalk Files
+# .elasticbeanstalk/*
+# !.elasticbeanstalk/*.cfg.yml
+# !.elasticbeanstalk/*.global.yml

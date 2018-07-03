@@ -13,11 +13,19 @@ Sample project to be used going forward as a baseline api for quick POC's and ot
 * bamboo for password recovery emails
 * unit testing + test driven development ready
 * dockerfile to create a deployable container ready for ECS
+* aws deployment with elastic beanstalk, push button deployment from command line and ci ready
 * Distillery to create standalone deployables for usage outside of mine ie. handoff
 
-### Future:
-* aws deployment script
+### project settings
 
+
+### config files changes
+* postgres database changes
+
+### To deploy:
+  1. install aws eb cli
+  2. `cd` into project directy and run `eb create`
+  3. run `eb deploy` to deploy changes to the server
 
 ---
 ---
