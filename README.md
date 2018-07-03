@@ -12,10 +12,10 @@ Sample project to be used going forward as a baseline api for quick POC's and ot
 * Password hashing into database via comeonin + bcrypt
 * bamboo for password recovery emails
 * unit testing + test driven development ready
-
+* dockerfile to create a deployable container ready for ECS
+* Distillery to create standalone deployables for usage outside of mine ie. handoff
 
 ### Future:
-* docker deployment + scripts
 * aws deployment script
 
 
