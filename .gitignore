@@ -1,6 +1,6 @@
 deps
 _build
-assets
+assets/node_modules/*
 .elixir_ls
 priv/static/smtp_credentials.csv
 
