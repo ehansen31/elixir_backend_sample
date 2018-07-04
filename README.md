@@ -1,6 +1,6 @@
 # ElixirBackendSample
 
-Sample project to be used going forward as a baseline api for quick POC's and other projects that involve rapid prototyping. Designed to be forked so that business logic can be immediately written into the codebase with the boilerplate complete. Could also serve as a hackthon boilerplate.
+Sample project to be used going forward as a baseline API for quick POC's and other projects that involve rapid prototyping. Designed to be forked so that business logic can be immediately written into the codebase with the boilerplate complete. Could also serve as a hackathon boilerplate.
 
 ## Features include:
 * Elixir functional programming language
@@ -21,7 +21,7 @@ Sample project to be used going forward as a baseline api for quick POC's and ot
 * Configure `prod.secret.exs` with database, smtp, and secret key (`mix guardian.gen.secret`).
 
 ### To deploy:
-  1. Install aws eb cli [instructions](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
+  1. Install AWS EB CLI [instructions](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
   2. `cd` into project directy and run `eb create`
   3. Run `eb deploy` to deploy changes to the server
 
