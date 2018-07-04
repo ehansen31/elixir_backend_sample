@@ -1,31 +1,29 @@
 # ElixirBackendSample
 
-Sample project to be used going forward as a baseline api for quick POC's and other projects that involve rapid prototyping. Designed to be forked so that business logic can be immediately written into the codebase with the boilerplate complete. Could also serve as a hackthon boilerplate. Intended to kickstart the consulting + dev shop work I would like to be involved with in the future.
-
+Sample project to be used going forward as a baseline api for quick POC's and other projects that involve rapid prototyping. Designed to be forked so that business logic can be immediately written into the codebase with the boilerplate complete. Could also serve as a hackthon boilerplate.
 
 ## Features include:
 * Elixir functional programming language
 * Phoenix web server and framework
 * Absinthe GraphQL library
-* ecto + postgrex for data models, migrations, and seeds
-* Guardian user token creation and validation through _authorization_ header in api requests
-* Password hashing into database via comeonin + bcrypt
-* bamboo for password recovery emails
-* unit testing + test driven development ready
-* dockerfile to create a deployable container ready for ECS
-* aws deployment with elastic beanstalk, push button deployment from command line and ci ready
-* Distillery to create standalone deployables for usage outside of mine ie. handoff
+* Ecto + Postgrex for data models, migrations, and seeds
+* Guardian user token creation and validation through `authorization` header in api requests
+* Password hashing into database via ComeOnIn + BCrypt
+* Bamboo for password recovery emails
+* Unit testing + test driven development ready
+* Dockerfile to create a portable deployment container
+* AWS deployment with Elastic Beanstalk, push button deployment from command line and CI ready
+* Distillery to create standalone deployables for use with other deployment strategies
 
-### project settings
-
-
-### config files changes
-* postgres database changes
+### Up and running
+* Follow phoenix directions below
+* Unit tests with `MIX_ENV=test mix test`
+* Configure `prod.secret.exs` with database, smtp, and secret key (`mix guardian.gen.secret`).
 
 ### To deploy:
-  1. install aws eb cli
+  1. Install aws eb cli [instructions](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
   2. `cd` into project directy and run `eb create`
-  3. run `eb deploy` to deploy changes to the server
+  3. Run `eb deploy` to deploy changes to the server
 
 ---
 ---

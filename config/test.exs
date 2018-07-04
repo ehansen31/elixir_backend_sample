@@ -18,5 +18,11 @@ config :elixir_backend_sample, ElixirBackendSample.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+# Configures Bamboo
 config :elixir_backend_sample, ElixirBackendSample.Mailer,
   adapter: Bamboo.TestAdapter
+
+# Configures Guardian
+config :elixir_backend_sample, ElixirBackendSample.Auth.Guardian,
+  issuer: "elixirbackendsample",
+  secret_key: "HNinpKh9Ne3tr8BpjCpAEh0xzCqTIG3PWsfkR2AtzvUaRIpbs6oIQ9RcmjmGPekJ"
