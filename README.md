@@ -22,6 +22,7 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
+  * GraphQL listings at [http://localhost:4000/api/graphiql](http://localhost:4000/api/graphiql)
   * Unit tests with `MIX_ENV=test mix test`
 
 ### To deploy:
