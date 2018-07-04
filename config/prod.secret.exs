@@ -12,7 +12,7 @@ config :elixir_backend_sample, ElixirBackendSampleWeb.Endpoint,
   secret_key_base: "U6STZZBPxHf0X4LS+xgC07Yfh3iuyrKUk/7PqCZKZdSUCqMNkSC/7rD6ks17YR+C"
 
 # Configures Bamboo Mail Client
-config :my_app, MyApp.Mailer,
+config :elixir_backend_sample, ElixirBackendSample.Mailer,
   adapter: Bamboo.SMTPAdapter,
   server: "smtp.domain",
   hostname: "your.domain",
