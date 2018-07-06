@@ -3,6 +3,9 @@
 Sample project to be used going forward as a baseline API for quick POC's and other projects that involve rapid prototyping. Designed to be forked so that business logic can be immediately written into the codebase with the boilerplate complete. Could also serve as a hackathon boilerplate.
 
 ---
+#### TODO:
+* add logging
+
 
 ## Features include:
   * Elixir functional programming language
