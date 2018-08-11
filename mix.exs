@@ -48,7 +48,8 @@ defmodule ElixirBackendSample.Mixfile do
       {:bcrypt_elixir, "~> 1.0"},
       {:bamboo, "~> 1.0"},
       {:bamboo_smtp, "~> 1.5.0"},
-      {:distillery, "~> 1.5", runtime: false}
+      {:distillery, "~> 1.5", runtime: false},
+      {:poison, "~> 3.1"}
     ]
   end
 

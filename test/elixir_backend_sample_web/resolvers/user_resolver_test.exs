@@ -126,4 +126,44 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       IO.inspect(res.resp_body)
       assert json_response(res, 200)["data"]["updateUser"]
   end
+
+  test "update user with json client_store", context do
+    {:ok, res} = registerUser(context)
+
+    query_login = """
+      query login{
+        login(email:"e.hansen31@live.com", password:"password")
+      }
+      """
+
+    login_res =
+      context.conn
+      |> put_req_header("content-type", "text")
+      |> post("/api", query_login)
+
+    case Poison.decode(login_res.resp_body, keys: :atoms) do
+      {:ok, token_data} -> token = token_data.data.login
+    end
+
+    query = """
+        mutation updateUser{
+          updateUser(client_store: {
+            field: "value"
+          }){
+            id
+          }
+        }
+      """
+      
+      
+
+    res =
+      context.conn
+      |> put_req_header("content-type", "text")
+      |> put_req_header("authorization", token)
+      |> post("/api", query)
+
+      IO.inspect(res.resp_body)
+      assert json_response(res, 200)["data"]["updateUser"]
+  end
 end

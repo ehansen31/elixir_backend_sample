@@ -73,6 +73,8 @@ defmodule ElixirBackendSampleWeb.Schema do
       arg(:first_name, :string)
       arg(:last_name, :string)
       arg(:age, :integer)
+      # arg(:settings, :map)
+      arg("client_store", :map)
 
       resolve(handle_errors(&Resolvers.User.update_user/3))
     end
@@ -83,5 +85,10 @@ defmodule ElixirBackendSampleWeb.Schema do
 
       resolve(handle_errors(&Resolvers.User.reset_password/3))
     end
+
+    # @desc "Update user json settings"
+    # field :update_user_json_settings, type :user do
+      
+    # end
   end
 end

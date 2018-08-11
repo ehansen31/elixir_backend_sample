@@ -13,6 +13,13 @@ defmodule ElixirBackendSampleWeb.Models.User do
     field(:first_name, :string)
     field(:last_name, :string)
     field(:age, :integer)
+    # unknown json structure
+    field("client_store", :map)
+    # known json structure
+    # embeds_one :settings, Settings, on_replace: :update do
+    #   field(:hero_ad, :string)
+    #   field(:carousel_ad, :string)
+    # end
   end
 
   def changeset(user, params \\ %{}) do
