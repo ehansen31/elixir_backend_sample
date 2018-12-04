@@ -28,10 +28,10 @@ defmodule ElixirBackendSampleWeb.Schema do
   end
 
   query do
-    # @desc "Get all posts"
-    # field :posts, list_of(:post) do
-    #   resolve(&Resolvers.Content.list_posts/3)
-    # end
+    @desc "Get all posts"
+    field :posts, list_of(:post) do
+      resolve(&Resolvers.Content.list_posts/3)
+    end
 
     @desc "Get user by id"
     field :get_user_by_id, :integer do
@@ -73,8 +73,7 @@ defmodule ElixirBackendSampleWeb.Schema do
       arg(:first_name, :string)
       arg(:last_name, :string)
       arg(:age, :integer)
-      # arg(:settings, :map)
-      arg("client_store", :map)
+      # arg(:client_store, :map)
 
       resolve(handle_errors(&Resolvers.User.update_user/3))
     end
@@ -85,10 +84,6 @@ defmodule ElixirBackendSampleWeb.Schema do
 
       resolve(handle_errors(&Resolvers.User.reset_password/3))
     end
-
-    # @desc "Update user json settings"
-    # field :update_user_json_settings, type :user do
-      
-    # end
+  # end
   end
 end

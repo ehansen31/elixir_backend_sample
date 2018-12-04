@@ -47,6 +47,8 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
         args = Map.delete(args, :password)
     end
 
+    # settings = %{email_signature: "Josh Steiner", send_emails: true}
+
     User.update_user(current_user, args)
   end
 

@@ -6,6 +6,19 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
+  
+  defmodule Settings do
+    use Ecto.Model
+  
+    # embedded_schema is short for:
+    #
+    #   @primary_key {:id, :binary_id, autogenerate: true}
+    #   schema "embedded Item" do
+    #
+    embedded_schema do
+      field(:receive_email, :boolean)
+    end
+  end
 
   schema "users" do
     field(:email, :string)
@@ -14,7 +27,8 @@ defmodule ElixirBackendSampleWeb.Models.User do
     field(:last_name, :string)
     field(:age, :integer)
     # unknown json structure
-    field("client_store", :map)
+    field(:client_store, :map)
+    # embeds_one :settings, Settings
     # known json structure
     # embeds_one :settings, Settings, on_replace: :update do
     #   field(:hero_ad, :string)
