@@ -6,6 +6,7 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
 #### TODO:
 * add logging
 * postgres jsonb document store capabilities
+* unit test mock database populated on run time
 
 
 ## Features include:
