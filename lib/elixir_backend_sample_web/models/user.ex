@@ -7,18 +7,18 @@ defmodule ElixirBackendSampleWeb.Models.User do
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
   
-  defmodule Settings do
-    use Ecto.Model
+  # defmodule Settings do
+  #   use Ecto.Model
   
-    # embedded_schema is short for:
-    #
-    #   @primary_key {:id, :binary_id, autogenerate: true}
-    #   schema "embedded Item" do
-    #
-    embedded_schema do
-      field(:receive_email, :boolean)
-    end
-  end
+  #   # embedded_schema is short for:
+  #   #
+  #   #   @primary_key {:id, :binary_id, autogenerate: true}
+  #   #   schema "embedded Item" do
+  #   #
+  #   embedded_schema do
+  #     field(:receive_email, :boolean)
+  #   end
+  # end
 
   schema "users" do
     field(:email, :string)
@@ -114,7 +114,13 @@ defmodule ElixirBackendSampleWeb.Models.User do
   end
 
   def update_user(user, args) do
-    
+    # potentially look for only fields that have changed by loading the existing user?
+
+    # also need to be able to convert a json client store to a map and store here?
+
+
+
+
     updated_user = Ecto.Changeset.change(user, args)
 
     case Repo.update updated_user do

@@ -1,5 +1,22 @@
 defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
-  use Absinthe.Schema.Notation
+  use Absinthe.Schema.Notation  
+
+  scalar :json do
+    parse fn input ->
+      case Poison.decode(input.value) do
+        {:ok, result} -> (
+          ElixirBackendSample.Logger.info "decoded input value: #{result}"
+          result
+        )
+        _ -> (
+          ElixirBackendSample.Logger.info "decoded input value error: #{input}"
+          :error
+        )
+      end
+    end
+  
+    serialize &Poison.encode!/1
+  end
 
   object :post do
     field(:id, :id)
@@ -14,5 +31,6 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     field(:first_name, :string)
     field(:last_name, :string)
     field(:age, :integer)
+    field(:client_store, :json)
   end
 end

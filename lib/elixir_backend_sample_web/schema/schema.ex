@@ -30,14 +30,14 @@ defmodule ElixirBackendSampleWeb.Schema do
   query do
     @desc "Get all posts"
     field :posts, list_of(:post) do
-      resolve(&Resolvers.Content.list_posts/3)
+      resolve(&Resolvers.Conten_Resolver.list_posts/3)
     end
 
     @desc "Get user by id"
     field :get_user_by_id, :integer do
       arg(:id, non_null(:integer))
 
-      resolve(&Resolvers.User.login/3)
+      resolve(&Resolvers.User_Resolver.login/3)
     end
 
     @desc "Login and return token"
@@ -45,12 +45,12 @@ defmodule ElixirBackendSampleWeb.Schema do
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
 
-      resolve(&Resolvers.User.login/3)
+      resolve(&Resolvers.User_Resolver.login/3)
     end
 
     @desc "Is the user logged in"
     field :is_logged, :boolean do
-      resolve(&Resolvers.User.is_logged/3)
+      resolve(&Resolvers.User_Resolver.is_logged/3)
     end
   end
 
@@ -63,7 +63,7 @@ defmodule ElixirBackendSampleWeb.Schema do
       arg(:last_name, :string)
       arg(:age, :integer)
 
-      resolve(handle_errors(&Resolvers.User.create_user/3))
+      resolve(handle_errors(&Resolvers.User_Resolver.create_user/3))
     end
 
     @desc "Update user"
@@ -73,16 +73,16 @@ defmodule ElixirBackendSampleWeb.Schema do
       arg(:first_name, :string)
       arg(:last_name, :string)
       arg(:age, :integer)
-      # arg(:client_store, :map)
+      arg(:client_store, :json)
 
-      resolve(handle_errors(&Resolvers.User.update_user/3))
+      resolve(handle_errors(&Resolvers.User_Resolver.update_user/3))
     end
 
     @desc "Reset user password via email"
     field :reset_user_password, type: :string do
       arg(:email, non_null(:string))
 
-      resolve(handle_errors(&Resolvers.User.reset_password/3))
+      resolve(handle_errors(&Resolvers.User_Resolver.reset_password/3))
     end
   # end
   end

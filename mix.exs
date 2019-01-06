@@ -37,7 +37,7 @@ defmodule ElixirBackendSample.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
-      {:absinthe, "~> 1.4.0"},
+      {:absinthe, "~> 1.4.3"},
       {:absinthe_plug, "~> 1.4"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},

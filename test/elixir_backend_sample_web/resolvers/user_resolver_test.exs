@@ -100,14 +100,20 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       }
       """
 
-    login_res =
+    token =
       context.conn
       |> put_req_header("content-type", "text")
       |> post("/api", query_login)
+      |> (fn login_res ->
+        case Poison.decode(login_res.resp_body, keys: :atoms) do
+          {:ok, token_data} -> token_data.data.login
+        end
+      end).()
 
-    case Poison.decode(login_res.resp_body, keys: :atoms) do
-      {:ok, token_data} -> token = token_data.data.login
-    end
+
+    # case Poison.decode(login_res.resp_body, keys: :atoms) do
+    #   {:ok, token_data} -> token = token_data.data.login
+    # end
 
     query = """
         mutation updateUser{
@@ -136,26 +142,29 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       }
       """
 
-    login_res =
+      token =
       context.conn
       |> put_req_header("content-type", "text")
       |> post("/api", query_login)
+      |> (fn login_res ->
+        case Poison.decode(login_res.resp_body, keys: :atoms) do
+          {:ok, token_data} -> token_data.data.login
+        end
+      end).()
 
-    case Poison.decode(login_res.resp_body, keys: :atoms) do
-      {:ok, token_data} -> token = token_data.data.login
-    end
+    # case Poison.decode(login_res.resp_body, keys: :atoms) do
+    #   {:ok, token_data} -> token = token_data.data.login
+    # end
 
     query = """
         mutation updateUser{
-          updateUser(client_store: {
-            field: "value"
-          }){
+          updateUser(client_store: "{field: value}"){
             id
           }
         }
       """
-      
-      
+
+
 
     res =
       context.conn

@@ -1,4 +1,4 @@
-defmodule ElixirBackendSampleWeb.Resolvers.User do
+defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
   def create_user(_parent, args, _resolution) do
     alias ElixirBackendSampleWeb.Models.User
     alias ElixirBackendSample.Repo
@@ -47,6 +47,7 @@ defmodule ElixirBackendSampleWeb.Resolvers.User do
         args = Map.delete(args, :password)
     end
 
+    ElixirBackendSample.Logger.info "decoded input value: #{args}"
     # settings = %{email_signature: "Josh Steiner", send_emails: true}
 
     User.update_user(current_user, args)
