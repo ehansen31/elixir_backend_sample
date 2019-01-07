@@ -42,12 +42,13 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
     alias ElixirBackendSampleWeb.Models.User
 
     cond do
-      args.password != nil ->
+      args[:password] != nil ->
         args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))
         args = Map.delete(args, :password)
+      true -> "Default value"
     end
 
-    ElixirBackendSample.Logger.info "decoded input value: #{args}"
+    # ElixirBackendSample.Logger.info "decoded input value: #{args}"
     # settings = %{email_signature: "Josh Steiner", send_emails: true}
 
     User.update_user(current_user, args)

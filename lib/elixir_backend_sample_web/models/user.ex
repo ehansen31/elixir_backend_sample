@@ -102,10 +102,10 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
     hashed_password = Comeonin.Bcrypt.hashpwsalt(new_password)
 
-    user = Ecto.Changeset.change user, password_hash: hashed_password
-    case Repo.update user do
+    user_changeset = Ecto.Changeset.change(user, password_hash: hashed_password)
+    case Repo.update user_changeset do
       {:error, changeset} -> {:error, changeset}
-      {:ok, changeset} -> user = changeset
+      {:ok, changeset} -> user_changeset = changeset
     end
 
     Email.password_reset_email(user, new_password) |> ElixirBackendSample.Mailer.deliver_later

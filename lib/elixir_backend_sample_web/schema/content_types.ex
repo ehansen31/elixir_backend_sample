@@ -1,28 +1,36 @@
 defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
-  use Absinthe.Schema.Notation  
+  use Absinthe.Schema.Notation
+  require Logger
 
-  scalar :json do
-    parse fn input ->
-      case Poison.decode(input.value) do
-        {:ok, result} -> (
-          ElixirBackendSample.Logger.info "decoded input value: #{result}"
-          result
-        )
-        _ -> (
-          ElixirBackendSample.Logger.info "decoded input value error: #{input}"
-          :error
-        )
-      end
+  scalar :json, name: "Json" do
+    description("""
+    The `Json` scalar type represents arbitrary json string data, represented as UTF-8
+    character sequences. The Json type is most often used to represent a free-form
+    human-readable json string.
+    """)
+    serialize(&encode/1)
+    parse(&decode/1)
+  end
+
+  # @spec decode(Absinthe.Blueprint.Input.String.t) :: {:ok, :string} | :error
+  # @spec decode(Absinthe.Blueprint.Input.Null.t) :: {:ok, nil}
+  defp decode(%Absinthe.Blueprint.Input.String{value: value}) do
+    Logger.info "decoded input value:"
+    case Poison.decode(value) do
+      {:ok, result} -> {:ok, result}
+      _ -> :error
     end
-  
-    serialize &Poison.encode!/1
   end
 
-  object :post do
-    field(:id, :id)
-    field(:title, :string)
-    field(:body, :string)
+  defp decode(%Absinthe.Blueprint.Input.Null{}) do
+    {:ok, nil}
   end
+
+  defp decode(_) do
+    :error
+  end
+
+  defp encode(value), do: value
 
   object :user do
     field(:id, :id)
@@ -32,5 +40,35 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     field(:last_name, :string)
     field(:age, :integer)
     field(:client_store, :json)
+  end
+
+
+  # scalar :json do
+  #   parse fn input ->
+  #     Logger.info "made it in"
+  #     case Poison.decode(input.value) do
+  #       {:ok, result} -> (
+  #         Logger.info "decoded input value:"
+  #         result
+  #       )
+  #       _ -> (
+  #         Logger.info "decoded input value error:"
+
+  #         :error
+  #       )
+  #     end
+  #   end
+
+  #   serialize &Poison.encode!/1
+  # end
+
+
+
+
+
+  object :post do
+    field(:id, :id)
+    field(:title, :string)
+    field(:body, :string)
   end
 end
