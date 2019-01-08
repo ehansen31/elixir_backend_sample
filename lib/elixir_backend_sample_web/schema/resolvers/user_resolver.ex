@@ -32,6 +32,14 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
     {:error, false}
   end
 
+  def get_user(_parent, _args, %{context: %{current_user: current_user}}) do
+    {:ok, current_user}
+  end
+
+  def get_user(_parent, _args, _resolution) do
+    {:error, "invalid user token"}
+  end
+
   def reset_password(_parent, args, _resolution) do
     alias ElixirBackendSampleWeb.Models.User
 

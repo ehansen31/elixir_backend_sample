@@ -157,11 +157,11 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
     # end
 # updateUser(client_store: \"{\"key\":\"value\"}\"){
     query = """
-        mutation updateUser{
-          updateUser(client_store: "{"key":"value"}"){
-            id
-          }
+      mutation updateUser{
+        updateUser(clientStore: "{key:value}"){
+          id
         }
+      }
       """
 
     res =

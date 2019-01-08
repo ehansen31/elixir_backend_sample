@@ -40,6 +40,11 @@ defmodule ElixirBackendSampleWeb.Schema do
       resolve(&Resolvers.User_Resolver.login/3)
     end
 
+    @desc "Get user"
+    field :get_user, :user do
+      resolve(&Resolvers.User_Resolver.get_user/3)
+    end
+
     @desc "Login and return token"
     field :login, :string do
       arg(:email, non_null(:string))

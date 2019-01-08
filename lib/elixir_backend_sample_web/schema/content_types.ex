@@ -12,8 +12,8 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     parse(&decode/1)
   end
 
-  # @spec decode(Absinthe.Blueprint.Input.String.t) :: {:ok, :string} | :error
-  # @spec decode(Absinthe.Blueprint.Input.Null.t) :: {:ok, nil}
+  @spec decode(Absinthe.Blueprint.Input.String.t) :: {:ok, :string} | :error
+  @spec decode(Absinthe.Blueprint.Input.Null.t) :: {:ok, nil}
   defp decode(%Absinthe.Blueprint.Input.String{value: value}) do
     Logger.info "decoded input value:"
     case Poison.decode(value) do
