@@ -14,6 +14,8 @@ defmodule ElixirBackendSampleWeb.Models.User do
     field(:last_name, :string)
     field(:age, :integer)
     field(:client_store, :map)
+    has_many(:content, ElixirBackendSampleWeb.Models.Content)
+    timestamps
   end
 
   def changeset(user, params \\ %{}) do

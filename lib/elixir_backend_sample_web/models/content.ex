@@ -7,14 +7,12 @@ defmodule ElixirBackendSampleWeb.Models.Content do
     alias ElixirBackendSample.Repo
 
     schema "content" do
-        field(:type, :string)
-        # field(:user_id, :user)
+        belongs_to(:user, ElixirBackendSampleWeb.Models.User)
         field(:text, :string)
-        field(:image, :string)
     end
 
     def changeset(content, params \\ %{}) do
-        
+
     end
 
     def get_content(id) do
@@ -29,4 +27,6 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         # potentially doesn't return just a user
         Repo.one(query)
     end
+
+    def 
 end
