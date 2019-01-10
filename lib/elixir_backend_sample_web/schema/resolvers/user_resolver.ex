@@ -13,9 +13,6 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
       {:ok, userObj} -> {:ok, userObj}
     end
 
-    # %User{}
-    # |> User.changeset(args)
-    # |> Repo.insert()
   end
 
   def login(_parent, args, _resolution) do
@@ -55,9 +52,6 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
         args = Map.delete(args, :password)
       true -> "Default value"
     end
-
-    # ElixirBackendSample.Logger.info "decoded input value: #{args}"
-    # settings = %{email_signature: "Josh Steiner", send_emails: true}
 
     User.update_user(current_user, args)
   end

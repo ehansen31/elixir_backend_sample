@@ -8,7 +8,6 @@ defmodule ElixirBackendSampleWeb.Schema do
   import Ecto.Changeset
 
   def format_changeset(changeset) do
-    # {:error, [email: {"has already been taken", []}]}
     errors =
       changeset.errors
       |> Enum.map(fn {key, {value, context}} ->
@@ -26,69 +25,64 @@ defmodule ElixirBackendSampleWeb.Schema do
       end
     end
   end
+  object :user_object do
+    query do
+        @desc "Get user by id"
+        field :get_user_by_id, :integer do
+          arg(:id, non_null(:integer))
 
-  query do
-    @desc "Get all posts"
-    field :posts, list_of(:post) do
-      resolve(&Resolvers.Conten_Resolver.list_posts/3)
-    end
+          resolve(&Resolvers.User_Resolver.login/3)
+        end
 
-    @desc "Get user by id"
-    field :get_user_by_id, :integer do
-      arg(:id, non_null(:integer))
+        @desc "Get user"
+        field :get_user, :user do
+          resolve(&Resolvers.User_Resolver.get_user/3)
+        end
 
-      resolve(&Resolvers.User_Resolver.login/3)
-    end
+        @desc "Login and return token"
+        field :login, :string do
+          arg(:email, non_null(:string))
+          arg(:password, non_null(:string))
 
-    @desc "Get user"
-    field :get_user, :user do
-      resolve(&Resolvers.User_Resolver.get_user/3)
-    end
+          resolve(&Resolvers.User_Resolver.login/3)
+        end
 
-    @desc "Login and return token"
-    field :login, :string do
-      arg(:email, non_null(:string))
-      arg(:password, non_null(:string))
+        @desc "Is the user logged in"
+        field :is_logged, :boolean do
+          resolve(&Resolvers.User_Resolver.is_logged/3)
+        end
+      end
 
-      resolve(&Resolvers.User_Resolver.login/3)
-    end
+    mutation do
+        @desc "Create a user"
+        field :create_user, type: :user do
+          arg(:email, non_null(:string))
+          arg(:password, non_null(:string))
+          arg(:first_name, :string)
+          arg(:last_name, :string)
+          arg(:age, :integer)
 
-    @desc "Is the user logged in"
-    field :is_logged, :boolean do
-      resolve(&Resolvers.User_Resolver.is_logged/3)
-    end
-  end
+          resolve(handle_errors(&Resolvers.User_Resolver.create_user/3))
+        end
 
-  mutation do
-    @desc "Create a user"
-    field :create_user, type: :user do
-      arg(:email, non_null(:string))
-      arg(:password, non_null(:string))
-      arg(:first_name, :string)
-      arg(:last_name, :string)
-      arg(:age, :integer)
+        @desc "Update user"
+        field :update_user, type: :user do
+          arg(:email, :string)
+          arg(:password, :string)
+          arg(:first_name, :string)
+          arg(:last_name, :string)
+          arg(:age, :integer)
+          arg(:client_store, :json)
 
-      resolve(handle_errors(&Resolvers.User_Resolver.create_user/3))
-    end
+          resolve(handle_errors(&Resolvers.User_Resolver.update_user/3))
+        end
 
-    @desc "Update user"
-    field :update_user, type: :user do
-      arg(:email, :string)
-      arg(:password, :string)
-      arg(:first_name, :string)
-      arg(:last_name, :string)
-      arg(:age, :integer)
-      arg(:client_store, :json)
+        @desc "Reset user password via email"
+        field :reset_user_password, type: :string do
+          arg(:email, non_null(:string))
 
-      resolve(handle_errors(&Resolvers.User_Resolver.update_user/3))
-    end
-
-    @desc "Reset user password via email"
-    field :reset_user_password, type: :string do
-      arg(:email, non_null(:string))
-
-      resolve(handle_errors(&Resolvers.User_Resolver.reset_password/3))
-    end
-  # end
+          resolve(handle_errors(&Resolvers.User_Resolver.reset_password/3))
+        end
+      end
   end
 end

@@ -7,7 +7,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
 
   defp registerUser(context) do
     query_register_user = """
-      mutation createUser{
+      mutation{
           createUser(email:"e.hansen31@live.com", password:"password"){
           id
         }
@@ -27,7 +27,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       # {:ok, note} = Notes.create_note(@user)
 
       query = """
-      mutation createUser{
+      mutation {
           createUser(email:"e.hansen31@live.com", password:"password"){
           id
         }
@@ -48,7 +48,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       {:ok, res} = registerUser(context)
 
       query = """
-      query login{
+      query {
         login(email:"e.hansen31@live.com", password:"password")
       }
       """
@@ -67,7 +67,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
       {:ok, res} = registerUser(context)
 
       query_reset_password = """
-        mutation resetUserPassword{
+        mutation {
             resetUserPassword(email:"e.hansen31@live.com")
         }
       """
@@ -95,7 +95,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
     {:ok, res} = registerUser(context)
 
     query_login = """
-      query login{
+      query {
         login(email:"e.hansen31@live.com", password:"password")
       }
       """
@@ -116,7 +116,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
     # end
 
     query = """
-        mutation updateUser{
+        mutation {
           updateUser(password: "password"){
             id
           }
@@ -137,7 +137,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
     {:ok, res} = registerUser(context)
 
     query_login = """
-      query login{
+      query {
         login(email:"e.hansen31@live.com", password:"password")
       }
       """
@@ -156,7 +156,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
     #   {:ok, token_data} -> token = token_data.data.login
     # end
 # updateUser(client_store: \"{\"key\":\"value\"}\"){
-    query = to_string('mutation updateUser{\n
+    query = to_string('mutation {\n
         updateUser(clientStore: \"{key:\"value\"}\"){\n
           id\n
         }\n
@@ -201,7 +201,7 @@ defmodule ElixirBackendSampleWeb.UserResolverTest do
 
 
     query = """
-    query getUser{
+    query {
       getUser{
         clientStore,
         id,

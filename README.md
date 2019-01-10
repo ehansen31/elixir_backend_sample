@@ -4,8 +4,9 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
 
 ---
 #### TODO:
+* model specific absinthe definitions
+* Cron Jobs
 * add logging
-* postgres jsonb document store capabilities
 * unit test mock database populated on run time
 
 
@@ -21,6 +22,7 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
   * Dockerfile to create a portable deployment container
   * AWS deployment with Elastic Beanstalk, push button deployment from command line and CI ready
   * Distillery to create standalone deployables for use with other deployment strategies
+  * Postgres jsonb document store capabilities on user as a "client store"
 
 ### Up and running
   * Install dependencies with `mix deps.get`

@@ -1,6 +1,5 @@
 defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
   use Absinthe.Schema.Notation
-  require Logger
 
   scalar :json, name: "Json" do
     description("""
@@ -15,7 +14,6 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
   @spec decode(Absinthe.Blueprint.Input.String.t) :: {:ok, :string} | :error
   @spec decode(Absinthe.Blueprint.Input.Null.t) :: {:ok, nil}
   defp decode(%Absinthe.Blueprint.Input.String{value: value}) do
-    Logger.info "decoded input value:"
     case Poison.decode(value) do
       {:ok, result} -> {:ok, result}
       _ -> :error
@@ -32,6 +30,7 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
 
   defp encode(value), do: value
 
+
   object :user do
     field(:id, :id)
     field(:email, :string)
@@ -42,33 +41,11 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     field(:client_store, :json)
   end
 
-
-  # scalar :json do
-  #   parse fn input ->
-  #     Logger.info "made it in"
-  #     case Poison.decode(input.value) do
-  #       {:ok, result} -> (
-  #         Logger.info "decoded input value:"
-  #         result
-  #       )
-  #       _ -> (
-  #         Logger.info "decoded input value error:"
-
-  #         :error
-  #       )
-  #     end
-  #   end
-
-  #   serialize &Poison.encode!/1
-  # end
-
-
-
-
-
-  object :post do
+  object :content do
     field(:id, :id)
-    field(:title, :string)
-    field(:body, :string)
+    field(:type, :string)
+    field(:text, :string)
+    field(:image, :string)
   end
+
 end

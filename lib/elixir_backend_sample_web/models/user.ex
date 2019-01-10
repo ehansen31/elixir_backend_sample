@@ -6,19 +6,6 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
-  
-  # defmodule Settings do
-  #   use Ecto.Model
-  
-  #   # embedded_schema is short for:
-  #   #
-  #   #   @primary_key {:id, :binary_id, autogenerate: true}
-  #   #   schema "embedded Item" do
-  #   #
-  #   embedded_schema do
-  #     field(:receive_email, :boolean)
-  #   end
-  # end
 
   schema "users" do
     field(:email, :string)
@@ -26,14 +13,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
     field(:first_name, :string)
     field(:last_name, :string)
     field(:age, :integer)
-    # unknown json structure
     field(:client_store, :map)
-    # embeds_one :settings, Settings
-    # known json structure
-    # embeds_one :settings, Settings, on_replace: :update do
-    #   field(:hero_ad, :string)
-    #   field(:carousel_ad, :string)
-    # end
   end
 
   def changeset(user, params \\ %{}) do
@@ -58,8 +38,6 @@ defmodule ElixirBackendSampleWeb.Models.User do
         where: u.id == ^id
       )
 
-    # Send the query to the repository
-    # potentially doesn't return just a user
     Repo.one(query)
   end
 
@@ -92,12 +70,11 @@ defmodule ElixirBackendSampleWeb.Models.User do
   end
 
   def reset_password(args) do
-    
+
     query = Ecto.Query.from(u in ElixirBackendSampleWeb.Models.User, where: u.email == ^args.email)
 
     user = Repo.one(query)
 
-    # set password to random string
     new_password = :crypto.strong_rand_bytes(12) |> Base.url_encode64 |> binary_part(0, 12)
 
     hashed_password = Comeonin.Bcrypt.hashpwsalt(new_password)
@@ -114,19 +91,11 @@ defmodule ElixirBackendSampleWeb.Models.User do
   end
 
   def update_user(user, args) do
-    # potentially look for only fields that have changed by loading the existing user?
-
-    # also need to be able to convert a json client store to a map and store here?
-
-
-
-
     updated_user = Ecto.Changeset.change(user, args)
 
     case Repo.update updated_user do
       {:error, changeset} -> {:error, changeset}
       {:ok, changeset} -> {:ok, changeset}
     end
-
   end
 end

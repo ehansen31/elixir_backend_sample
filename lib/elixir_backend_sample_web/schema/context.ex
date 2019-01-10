@@ -13,7 +13,6 @@ defmodule ElixirBackendSampleWeb.Context do
     case build_context(conn) do
       {:ok, context} ->
         put_private(conn, :absinthe, %{context: context})
-
       _ ->
         conn
     end
@@ -31,13 +30,5 @@ defmodule ElixirBackendSampleWeb.Context do
       {:ok, resource, _claims} -> {:ok, resource}
       {:error, _any} -> {:error, "Invalid authorization token"}
     end
-
-    # User
-    # |> where(token: ^token)
-    # |> Repo.one()
-    # |> case do
-    #   nil -> {:error, "Invalid authorization token"}
-    #   user -> {:ok, user}
-    # end
   end
 end
