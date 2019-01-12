@@ -4,11 +4,11 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
 
 ---
 #### TODO:
-* model specific absinthe definitions
 * Cron Jobs
+  * Welcome email on signup?
 * add logging
+* email validation
 * unit test mock database populated on run time
-
 
 ## Features include:
   * Elixir functional programming language

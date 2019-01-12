@@ -49,7 +49,9 @@ defmodule ElixirBackendSample.Mixfile do
       {:bamboo, "~> 1.0"},
       {:bamboo_smtp, "~> 1.5.0"},
       {:distillery, "~> 1.5", runtime: false},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:quantum, "~> 2.3"},
+      {:timex, "~> 3.0"}
     ]
   end
 

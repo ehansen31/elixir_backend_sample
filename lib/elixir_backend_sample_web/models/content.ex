@@ -9,10 +9,23 @@ defmodule ElixirBackendSampleWeb.Models.Content do
     schema "content" do
         belongs_to(:user, ElixirBackendSampleWeb.Models.User)
         field(:text, :string)
+        timestamps
+    end
+    def changeset(content, params \\ %{}) do
+        content
+        |> validate_required([:user, :text])
     end
 
-    def changeset(content, params \\ %{}) do
 
+    def create_content(user, text) do
+
+        content = Ecto.build_assoc(user, :content, text: "Excellent!")
+        changeset = Content.changeset(%Content{}, content)
+
+        Repo.insert(changeset) do
+            {:error, changeset} -> {:error, changeset}
+            {:ok, contentObj} -> {:ok, contentObj}
+        end
     end
 
     def get_content(id) do
@@ -28,5 +41,12 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         Repo.one(query)
     end
 
-    def 
+    def get_user_content do
+        query = from(
+            c in ElixirBackendSampleWeb.Models.Content,
+            where: c.id == ^id
+        )
+
+        Repo.all(query)
+    end
 end
