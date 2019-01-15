@@ -85,6 +85,7 @@ defmodule ElixirBackendSampleWeb.Schema do
           resolve(handle_errors(&Resolvers.User_Resolver.reset_password/3))
         end
 
+        
         @desc "Create content"
         field :create_content, type: :content do
           arg(:text, non_null(:string))

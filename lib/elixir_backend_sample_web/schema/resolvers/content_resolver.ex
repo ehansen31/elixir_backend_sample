@@ -3,15 +3,15 @@ defmodule ElixirBackendSampleWeb.Resolvers.Content_Resolver do
   alias ElixirBackendSampleWeb.Models.Content
   alias ElixirBackendSample.Repo  
 
-  # def create_content(_parent, args, %{context: %{current_user: user}}) do
-  #   Content.create_content(current_user, args.text)
-  # end
+  def create_content(_parent, args, %{context: %{current_user: user}}) do
+    Content.create_content(current_user, args.text)
+  end
 
-  # def create_content(_parent, _args, _resolution) do
-  #   {:error, "Access denied"}.
-  # end
-
-
+  def create_content(_parent, _args, _resolution) do
+    {:error, "Access denied"}.
+  end
+end
+end
   # def get_content(_parent, args, %{context: %{current_user: user}}) do
 
   #   Content.get_content(current_user, args.id)
@@ -29,4 +29,3 @@ defmodule ElixirBackendSampleWeb.Resolvers.Content_Resolver do
   # def get_user_content(_parent, _args, _resolution) do
   #   {:error, "Access denied"}
   # end
-end
