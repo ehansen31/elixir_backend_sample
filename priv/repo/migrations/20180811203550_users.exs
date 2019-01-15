@@ -2,8 +2,8 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
-    drop table(:users)
-    drop table(:content)
+    # drop table(:users)
+    # drop table(:content)
 
     create table(:users) do
       add(:email, :string)
@@ -12,13 +12,13 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
       add(:last_name, :string)
       add(:age, :integer)
       add(:client_store, :map, default: "{}")
-      timestamps
+      timestamps()
     end
 
     create table(:content) do
       add :conent_id, references(:users)
       add :text, :string
-      timestamps
+      timestamps()
     end
 
     create(unique_index(:users, [:email]))

@@ -84,32 +84,35 @@ defmodule ElixirBackendSampleWeb.Schema do
 
           resolve(handle_errors(&Resolvers.User_Resolver.reset_password/3))
         end
+
+        @desc "Create content"
+        field :create_content, type: :content do
+          arg(:text, non_null(:string))
+  
+          resolve(handle_errors(&Resolvers.Content_Resolver.create_content/3))
+        end
       end
   end
 
   object :content_object do
-    query do
-      @desc "Get content"
-      field :get_content, type: :content do
-        arg(:id, non_null(:integer))
+    # query do
+    #   @desc "Get content"
+    #   field :get_content, type: :content do
+    #     arg(:id, non_null(:integer))
 
-        resolve(handle_errors(&Resolvers.Content_Resolver.get_content/3))
-      end
+    #     resolve(handle_errors(&Resolvers.Content_Resolver.get_content/3))
+    #   end
 
-      @desc "Get User Content"
-      field :get_content, type: :content do
-        arg(:id, non_null(:integer))
+    #   @desc "Get User Content"
+    #   field :get_content, type: :content do
+    #     arg(:id, non_null(:integer))
 
-        resolve(handle_errors(&Resolvers.Content_Resolver.get_user_content/3))
-      end
+    #     resolve(handle_errors(&Resolvers.Content_Resolver.get_user_content/3))
+    #   end
+    # end
+
+      
+
+
     end
-
-    mutation do
-      @desc "Create content"
-      field :create_content, type: :content do
-        arg(:text, non_null(:string))
-
-        resolve(handle_errors(&Resolvers.Content_Resolver.create_content/3))
-    end
-  end
 end

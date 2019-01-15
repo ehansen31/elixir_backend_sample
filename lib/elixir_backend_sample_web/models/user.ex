@@ -1,42 +1,45 @@
 defmodule ElixirBackendSampleWeb.Models.User do
-  use Ecto.Schema
+  # use Ecto.Schema
+  alias ElixirBackendSampleWeb.EctoSchema.User
 
-  import Ecto.Changeset
+  # import Ecto.Changeset
   import Ecto.Query
 
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
 
-  schema "users" do
-    field(:email, :string)
-    field(:password_hash, :string)
-    field(:first_name, :string)
-    field(:last_name, :string)
-    field(:age, :integer)
-    field(:client_store, :map)
-    has_many(:content, ElixirBackendSampleWeb.Models.Content)
-    timestamps
-  end
+  # schema "users" do
+  #   field(:email, :string)
+  #   field(:password_hash, :string)
+  #   field(:first_name, :string)
+  #   field(:last_name, :string)
+  #   field(:age, :integer)
+  #   field(:client_store, :map)
+  #   has_many(:content, ElixirBackendSampleWeb.Models.Content)
+  #   timestamps
+  # end
 
-  def changeset(user, params \\ %{}) do
-    user
-    |> cast(params, [:email, :password_hash])
-    |> validate_required([:email, :password_hash])
-    |> validate_format(:email, ~r/@/)
-    # |> validate_length(:password, min: 5, max: 10)
-    # |> validate_inclusion(:age, 18..100)
-    |> unique_constraint(:email)
+    
 
-    # |> put_password_hash()
+  # def changeset(user, params \\ %{}) do
+  #   user
+  #   |> cast(params, [:email, :password_hash])
+  #   |> validate_required([:email, :password_hash])
+  #   |> validate_format(:email, ~r/@/)
+  #   # |> validate_length(:password, min: 5, max: 10)
+  #   # |> validate_inclusion(:age, 18..100)
+  #   |> unique_constraint(:email)
 
-    # |> unsafe_validate_unique(:email, Repo)
-  end
+  #   # |> put_password_hash()
+
+  #   # |> unsafe_validate_unique(:email, Repo)
+  # end
 
   def get_user(id) do
     # Create a query
     query =
       from(
-        u in ElixirBackendSampleWeb.Models.User,
+        u in ElixirBackendSampleWeb.EctoSchema.User,
         where: u.id == ^id
       )
 
@@ -44,7 +47,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
   end
 
   defp authenticate_user(email, given_password) do
-    query = Ecto.Query.from(u in ElixirBackendSampleWeb.Models.User, where: u.email == ^email)
+    query = Ecto.Query.from(u in ElixirBackendSampleWeb.EctoSchema.User, where: u.email == ^email)
 
     Repo.one(query)
     |> check_password(given_password)
@@ -73,7 +76,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   def reset_password(args) do
 
-    query = Ecto.Query.from(u in ElixirBackendSampleWeb.Models.User, where: u.email == ^args.email)
+    query = Ecto.Query.from(u in ElixirBackendSampleWeb.EctoSchema.User, where: u.email == ^args.email)
 
     user = Repo.one(query)
 

@@ -1,6 +1,7 @@
 defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
   def create_user(_parent, args, _resolution) do
-    alias ElixirBackendSampleWeb.Models.User
+    # alias ElixirBackendSampleWeb.Models.User
+    alias ElixirBackendSampleWeb.EctoSchema.User
     alias ElixirBackendSample.Repo
 
     args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))
