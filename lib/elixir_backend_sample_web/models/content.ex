@@ -4,6 +4,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
 
     alias ElixirBackendSample.Repo
     alias ElixirBackendSampleWeb.EctoSchema.Content
+    alias ElixirBackendSampleWeb.Schema.ContentTypes
 
     def create_content(user, text) do
 

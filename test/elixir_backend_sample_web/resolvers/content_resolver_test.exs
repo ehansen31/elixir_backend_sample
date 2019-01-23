@@ -7,15 +7,23 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
 
     describe "Content Resolver" do
         test "create content on an existing user", context do
-            # {:ok, note} = Notes.create_note(@user)
-            {:ok, token} = TestHelper.register_login_getToken(context)
+            {:ok, token} = TestHelper.register_login_getToken()
 
+            Logger.warn token
+
+            query = """
+                mutation{
+                    createContent(text:"example text here"){
+                        id
+                    }
+                }
+            """
 
             res =
-              context.conn
+            build_conn()
               |> put_req_header("content-type", "text")
-              |> post("/api", query)
               |> put_req_header("authorization", token)
+              |> post("/api", query)
 
             IO.inspect(res.resp_body)
 

@@ -3,7 +3,10 @@ ExUnit.start()
 Ecto.Adapters.SQL.Sandbox.mode(ElixirBackendSample.Repo, :manual)
 
 defmodule ElixirBackendSampleWeb.TestHelper do
-    def register_login_getToken(context)do
+    use ElixirBackendSampleWeb.ConnCase
+
+    require Logger
+    def register_login_getToken()do
         query_register_user = """
             mutation{
                 createUser(email:"e.hansen31@live.com", password:"password"){
@@ -13,7 +16,7 @@ defmodule ElixirBackendSampleWeb.TestHelper do
         """
 
         res =
-            context.conn
+            build_conn()
             |> put_req_header("content-type", "text")
             |> post("/api", query_register_user)
 
@@ -24,7 +27,7 @@ defmodule ElixirBackendSampleWeb.TestHelper do
         """
 
         token =
-            context.conn
+            build_conn()
             |> put_req_header("content-type", "text")
             |> post("/api", query_login)
             |> (fn login_res ->
