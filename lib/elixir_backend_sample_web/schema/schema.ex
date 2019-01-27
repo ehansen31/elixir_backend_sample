@@ -56,8 +56,8 @@ defmodule ElixirBackendSampleWeb.Schema do
 
         @desc "Get content"
         field :get_content, type: :content do
-          arg(:id, non_null(:integer))
-  
+          arg(:id, non_null(:string))
+
           resolve(handle_errors(&Resolvers.Content_Resolver.get_content/3))
         end
       end
@@ -93,11 +93,11 @@ defmodule ElixirBackendSampleWeb.Schema do
           resolve(handle_errors(&Resolvers.User_Resolver.reset_password/3))
         end
 
-        
+
         @desc "Create content"
         field :create_content, type: :content do
           arg(:text, non_null(:string))
-  
+
           resolve(handle_errors(&Resolvers.Content_Resolver.create_content/3))
         end
       end

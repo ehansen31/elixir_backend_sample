@@ -9,6 +9,7 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
 * add logging
 * email validation
 * unit test mock database populated on run time
+* model changesets for data validation
 
 ## Features include:
   * Elixir functional programming language

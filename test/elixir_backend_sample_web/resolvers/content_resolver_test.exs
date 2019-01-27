@@ -36,7 +36,7 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
 
             query = """
                 query{
-                    getContent(id:1){
+                    getContent(id:"1"){
                         id,
                         text
                     }

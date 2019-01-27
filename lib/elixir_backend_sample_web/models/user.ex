@@ -7,20 +7,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
-
-  # schema "users" do
-  #   field(:email, :string)
-  #   field(:password_hash, :string)
-  #   field(:first_name, :string)
-  #   field(:last_name, :string)
-  #   field(:age, :integer)
-  #   field(:client_store, :map)
-  #   has_many(:content, ElixirBackendSampleWeb.Models.Content)
-  #   timestamps
-  # end
-
-    
-
+ 
   # def changeset(user, params \\ %{}) do
   #   user
   #   |> cast(params, [:email, :password_hash])

@@ -8,10 +8,11 @@ defmodule ElixirBackendSampleWeb.Models.Content do
 
     def create_content(user, text) do
 
-        content = Ecto.build_assoc(user, :content, text: "Excellent!")
-        changeset = Content.changeset(%Content{}, content)
+        content = Ecto.build_assoc(user, :content, text: text)
+        IO.inspect(content)
+        # changeset = Content.changeset(%Content{}, content)
 
-        case Repo.insert(changeset) do
+        case Repo.insert(content) do
             {:error, changeset} -> {:error, changeset}
             {:ok, contentObj} -> {:ok, contentObj}
         end
@@ -26,10 +27,11 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         )
 
 
-        case Repo.one(query) do
-            {:ok, contentObj} -> {:ok, contentObj}
-            _ -> {:error, "content not found"}
-        end
+        # case Repo.one(query) do
+        #     {:ok, contentObj} -> {:ok, contentObj}
+        #     _ -> {:error, "content not found"}
+        # end
+        Repo.one(query)
 
         # ensure that the content belongs to the user requesting it
 
