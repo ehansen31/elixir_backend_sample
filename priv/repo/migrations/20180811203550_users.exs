@@ -16,7 +16,7 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
     end
 
     create table(:content) do
-      add :conent_id, references(:users)
+      add :user_id, references(:users)
       add :text, :string
       timestamps()
     end

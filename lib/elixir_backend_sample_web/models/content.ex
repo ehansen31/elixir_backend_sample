@@ -17,20 +17,34 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         end
     end
 
-    def get_content(id) do
+    def get_content(userObj, id) do
         query =
         from(
-            c in ElixirBackendSampleWeb.Models.Content,
-            where: c.id == ^id
+            c in ElixirBackendSampleWeb.EctoSchema.Content,
+            where: c.id == ^id,
+            preload: [:user]
         )
 
-        Repo.one(query)
+
+        case Repo.one(query) do
+            {:ok, contentObj} -> {:ok, contentObj}
+            _ -> {:error, "content not found"}
+        end
+
+        # ensure that the content belongs to the user requesting it
+
+        # Repo.one from content in ElixirBackendSampleWeb.EctoSchema.Content,
+        #     where: content.id == ^id and user.id == ^userObj.id,
+        #     preload: [:user]
+
+        # assoc(current_user, :posts) |> Post.published() |> Repo.all()
     end
 
     def get_user_content(id) do
         query = from(
-            c in ElixirBackendSampleWeb.Models.Content,
-            where: c.user_id == ^id
+            c in ElixirBackendSampleWeb.EctoSchema.Content,
+            where: c.user_id == ^id,
+            preload: [:user]
         )
 
         Repo.all(query)

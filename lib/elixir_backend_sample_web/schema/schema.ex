@@ -52,6 +52,14 @@ defmodule ElixirBackendSampleWeb.Schema do
         field :is_logged, :boolean do
           resolve(&Resolvers.User_Resolver.is_logged/3)
         end
+
+
+        @desc "Get content"
+        field :get_content, type: :content do
+          arg(:id, non_null(:integer))
+  
+          resolve(handle_errors(&Resolvers.Content_Resolver.get_content/3))
+        end
       end
 
     mutation do
@@ -95,14 +103,9 @@ defmodule ElixirBackendSampleWeb.Schema do
       end
   end
 
-  object :content_object do
+  # object :content_object do
     # query do
-    #   @desc "Get content"
-    #   field :get_content, type: :content do
-    #     arg(:id, non_null(:integer))
 
-    #     resolve(handle_errors(&Resolvers.Content_Resolver.get_content/3))
-    #   end
 
     #   @desc "Get User Content"
     #   field :get_content, type: :content do
@@ -112,8 +115,5 @@ defmodule ElixirBackendSampleWeb.Schema do
     #   end
     # end
 
-      
-
-
-    end
+    # end
 end
