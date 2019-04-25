@@ -35,6 +35,7 @@ defmodule ElixirBackendSampleWeb.EctoSchema.Content do
     schema "content" do
         belongs_to(:user, ElixirBackendSampleWeb.EctoSchema.User)
         field(:text, :string)
+        # field(:id, :id)
         timestamps
     end
 

@@ -1,21 +1,22 @@
 defmodule ElixirBackendSampleWeb.Models.Content do
     import Ecto.Changeset
     import Ecto.Query
-
+    require Logger
     alias ElixirBackendSample.Repo
     alias ElixirBackendSampleWeb.EctoSchema.Content
     alias ElixirBackendSampleWeb.Schema.ContentTypes
 
     def create_content(user, text) do
-
         content = Ecto.build_assoc(user, :content, text: text)
-        IO.inspect(content)
-        # changeset = Content.changeset(%Content{}, content)
 
         case Repo.insert(content) do
-            {:error, changeset} -> {:error, changeset}
-            {:ok, contentObj} -> {:ok, contentObj}
+            {:error, changeset} -> {:error, changeset} 
+            {:ok, contentObj} -> 
+                Logger.warn "content creation result"
+                IO.inspect(contentObj)
+                {:ok, contentObj}
         end
+        # val
     end
 
     def get_content(userObj, id) do
@@ -25,14 +26,23 @@ defmodule ElixirBackendSampleWeb.Models.Content do
             where: c.id == ^id,
             preload: [:user]
         )
-
-
-        # case Repo.one(query) do
+        # Logger.warn "get content query is: "
+        # IO.inspect query
+        case Repo.get(Content, id) do
+            {:ok, contentObj} -> {:ok, contentObj}
+            {:error, reason} -> {:error, reason}
+            _ -> {:error, "content not found"}            
+        end
+        # case Repo.one!(query) do
         #     {:ok, contentObj} -> {:ok, contentObj}
+        #     {:error, reason} -> {:error, reason}
         #     _ -> {:error, "content not found"}
         # end
-        Repo.one(query)
 
+        # val = Repo.one(query)
+        # Logger.warn "inspect get content query contents: "<>val
+        # {:ok, val}
+ 
         # ensure that the content belongs to the user requesting it
 
         # Repo.one from content in ElixirBackendSampleWeb.EctoSchema.Content,
@@ -43,13 +53,19 @@ defmodule ElixirBackendSampleWeb.Models.Content do
     end
 
     def get_user_content(id) do
+        Logger.warn "made it to model"
         query = from(
             c in ElixirBackendSampleWeb.EctoSchema.Content,
             where: c.user_id == ^id,
             preload: [:user]
         )
 
-        Repo.all(query)
+        Logger.warn "get all user content query is: "
+        IO.inspect query
+
+        data = Repo.all(query)
+        Logger.warn "get all user content data is: "
+        IO.inspect data
     end
 
     def update_content(content, args) do

@@ -1,26 +1,10 @@
 defmodule ElixirBackendSampleWeb.Models.User do
-  # use Ecto.Schema
   alias ElixirBackendSampleWeb.EctoSchema.User
 
-  # import Ecto.Changeset
   import Ecto.Query
 
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
- 
-  # def changeset(user, params \\ %{}) do
-  #   user
-  #   |> cast(params, [:email, :password_hash])
-  #   |> validate_required([:email, :password_hash])
-  #   |> validate_format(:email, ~r/@/)
-  #   # |> validate_length(:password, min: 5, max: 10)
-  #   # |> validate_inclusion(:age, 18..100)
-  #   |> unique_constraint(:email)
-
-  #   # |> put_password_hash()
-
-  #   # |> unsafe_validate_unique(:email, Repo)
-  # end
 
   def get_user(id) do
     # Create a query

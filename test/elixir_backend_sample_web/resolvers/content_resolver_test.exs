@@ -9,8 +9,6 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
         test "create content on an existing user", context do
             {:ok, token} = TestHelper.register_login_getToken()
 
-            Logger.warn token
-
             query = """
                 mutation{
                     createContent(text:"example text here"){
@@ -26,8 +24,6 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
               |> put_req_header("authorization", token)
               |> post("/api", query)
 
-            IO.inspect(res.resp_body)
-
             assert json_response(res, 200)["data"]["createContent"]["id"]
         end
 
@@ -37,7 +33,6 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
             query = """
                 query{
                     getContent(id:"1"){
-                        id,
                         text
                     }
                 }
@@ -49,9 +44,31 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
               |> put_req_header("authorization", token)
               |> post("/api", query)
 
-            IO.inspect(res.resp_body)
+            Logger.warn "get content response body: " <> res.resp_body
 
-            assert json_response(res, 200)["data"]["createContent"]["id"]
+            assert json_response(res, 200)["data"]["getContent"]["id"]
         end
+
+        # test "get all content for a user", context do 
+        #     {:ok, token} = TestHelper.register_login_getToken()
+
+        #     query = """
+        #         query{
+        #             getAllUserContent(){
+        #                 text
+        #             }
+        #         }
+        #     """
+
+        #     res =
+        #     build_conn()
+        #       |> put_req_header("content-type", "text")
+        #       |> put_req_header("authorization", token)
+        #       |> post("/api", query)
+
+        #     Logger.warn "get all user content response body: " <> res.resp_body
+
+        #     assert json_response(res, 200)["data"]["getAllUserContent"]["id"]
+        # end
     end
 end
