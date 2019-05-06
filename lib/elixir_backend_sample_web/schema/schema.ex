@@ -54,7 +54,7 @@ defmodule ElixirBackendSampleWeb.Schema do
       end
 
       @desc "Get content"
-      field :get_content, type: :content do
+      field :get_content, type: Absinthe.Schema.Notation.list_of(:content) do
         arg(:id, non_null(:string))
 
         resolve(handle_errors(&Resolvers.Content_Resolver.get_content/3))

@@ -20,36 +20,25 @@ defmodule ElixirBackendSampleWeb.Models.Content do
     end
 
     def get_content(userObj, id) do
-        query =
-        from(
-            c in ElixirBackendSampleWeb.EctoSchema.Content,
-            # where: c.id == ^id,
-            # preload: [:user]
-        )
-        # Logger.warn "get content query is: "
-        # IO.inspect query
-        # case Repo.get(ElixirBackendSampleWeb.EctoSchema.Content, id) do
-        #     {:ok, contentObj} -> {:ok, contentObj}
+        # query =
+        # from(
+        #     c in ElixirBackendSampleWeb.EctoSchema.Content,
+        #     where: c.id == ^id
+        #     # preload: [:user]
+        # )
+
+        data = Repo.all(ElixirBackendSampleWeb.EctoSchema.Content)
+        Logger.warn "get content query is: "
+        IO.inspect(data) 
+
+        {:ok, data}
+        # case Repo.all(ElixirBackendSampleWeb.EctoSchema.Content) do
+        #     {:ok, contentObj} -> 
+        #         Logger.warn "get content query is: "<>contentObj 
+        #     {:ok, contentObj}
         #     {:error, reason} -> {:error, reason}
-        #     _ -> {:error, "content not found"}            
+        #     _ -> {:error, "content not found"}
         # end
-        case Repo.one(query) do
-            {:ok, contentObj} -> {:ok, contentObj}
-            {:error, reason} -> {:error, reason}
-            _ -> {:error, "content not found"}
-        end
-
-        # val = Repo.one(query)
-        # Logger.warn "inspect get content query contents: "<>val
-        # {:ok, val}
- 
-        # ensure that the content belongs to the user requesting it
-
-        # Repo.one from content in ElixirBackendSampleWeb.EctoSchema.Content,
-        #     where: content.id == ^id and user.id == ^userObj.id,
-        #     preload: [:user]
-
-        # assoc(current_user, :posts) |> Post.published() |> Repo.all()
     end
 
     def get_user_content(id) do
