@@ -10,6 +10,7 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
 * email validation
 * unit test mock database populated on run time
 * model changesets for data validation
+* reorganize graphql directory structure
 
 ## Features include:
   * Elixir functional programming language
