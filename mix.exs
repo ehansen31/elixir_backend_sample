@@ -43,6 +43,7 @@ defmodule ElixirBackendSample.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:plug_cowboy, "~> 1.0"},
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
@@ -50,6 +51,7 @@ defmodule ElixirBackendSample.Mixfile do
       {:bamboo_smtp, "~> 1.5.0"},
       {:distillery, "~> 1.5", runtime: false},
       {:poison, "~> 3.1"},
+      {:jason, "~> 1.1"},
       {:quantum, "~> 2.3"},
       {:timex, "~> 3.0"}
     ]

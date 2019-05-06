@@ -23,21 +23,21 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         query =
         from(
             c in ElixirBackendSampleWeb.EctoSchema.Content,
-            where: c.id == ^id,
-            preload: [:user]
+            # where: c.id == ^id,
+            # preload: [:user]
         )
         # Logger.warn "get content query is: "
         # IO.inspect query
-        case Repo.get(Content, id) do
-            {:ok, contentObj} -> {:ok, contentObj}
-            {:error, reason} -> {:error, reason}
-            _ -> {:error, "content not found"}            
-        end
-        # case Repo.one!(query) do
+        # case Repo.get(ElixirBackendSampleWeb.EctoSchema.Content, id) do
         #     {:ok, contentObj} -> {:ok, contentObj}
         #     {:error, reason} -> {:error, reason}
-        #     _ -> {:error, "content not found"}
+        #     _ -> {:error, "content not found"}            
         # end
+        case Repo.one(query) do
+            {:ok, contentObj} -> {:ok, contentObj}
+            {:error, reason} -> {:error, reason}
+            _ -> {:error, "content not found"}
+        end
 
         # val = Repo.one(query)
         # Logger.warn "inspect get content query contents: "<>val

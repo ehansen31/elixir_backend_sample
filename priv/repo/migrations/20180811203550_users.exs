@@ -6,6 +6,7 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
     # drop table(:content)
 
     create table(:users) do
+      # add(:id, :id)
       add(:email, :string)
       add(:password_hash, :string)
       add(:first_name, :string)
@@ -16,6 +17,7 @@ defmodule ElixirBackendSample.Repo.Migrations.CreateUsers do
     end
 
     create table(:content) do
+      # add(:id, :id)
       add :user_id, references(:users)
       add :text, :string
       timestamps()
