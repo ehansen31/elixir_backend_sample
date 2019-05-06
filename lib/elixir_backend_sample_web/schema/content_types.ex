@@ -43,11 +43,10 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
 
   object :content do
     field(:id, :id)
-    # need id to user here?
     field(:user_id, :id)
-    field(:type, :string)
     field(:text, :string)
-    field(:image, :string)
+    # field(:text, :string)
+    # field(:image, :string)
   end
 
 end

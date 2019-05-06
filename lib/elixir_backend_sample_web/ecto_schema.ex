@@ -40,6 +40,7 @@ defmodule ElixirBackendSampleWeb.EctoSchema.Content do
 
     def changeset(content, params \\ %{}) do
         content
+        |> cast(params, [:text])
         # |> validate_required([:user, :text])
     end
 end

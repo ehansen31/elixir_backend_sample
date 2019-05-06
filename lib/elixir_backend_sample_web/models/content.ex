@@ -10,8 +10,8 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         content = Ecto.build_assoc(user, :content, text: text)
 
         case Repo.insert(content) do
-            {:error, changeset} -> {:error, changeset} 
-            {:ok, contentObj} -> 
+            {:error, changeset} -> {:error, changeset}
+            {:ok, contentObj} ->
                 Logger.warn "content creation result"
                 IO.inspect(contentObj)
                 {:ok, contentObj}
@@ -20,25 +20,19 @@ defmodule ElixirBackendSampleWeb.Models.Content do
     end
 
     def get_content(userObj, id) do
-        # query =
-        # from(
-        #     c in ElixirBackendSampleWeb.EctoSchema.Content,
-        #     where: c.id == ^id
-        #     # preload: [:user]
-        # )
+        query =
+        from c in ElixirBackendSampleWeb.EctoSchema.Content,
+        where: c.id == ^id
 
-        data = Repo.all(ElixirBackendSampleWeb.EctoSchema.Content)
-        Logger.warn "get content query is: "
-        IO.inspect(data) 
-
+        data = Repo.all(query)
+        Logger.warn "get content query is: #{inspect(data)}"
+        # check that the content belongs to the authenticated user
         {:ok, data}
-        # case Repo.all(ElixirBackendSampleWeb.EctoSchema.Content) do
-        #     {:ok, contentObj} -> 
-        #         Logger.warn "get content query is: "<>contentObj 
-        #     {:ok, contentObj}
+        # case data do
+        #     {:ok, data} -> data
         #     {:error, reason} -> {:error, reason}
-        #     _ -> {:error, "content not found"}
-        # end
+        #     _->{:error,"content not found"}
+        # end       
     end
 
     def get_user_content(id) do
