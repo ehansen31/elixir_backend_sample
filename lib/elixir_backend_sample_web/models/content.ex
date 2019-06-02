@@ -28,7 +28,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         Logger.warn "get content query is: #{inspect(data)}"
         # check that the content belongs to the authenticated user
         {:ok, data}
-        # case data do
+        # case Repo.all(query) do
         #     {:ok, data} -> data
         #     {:error, reason} -> {:error, reason}
         #     _->{:error,"content not found"}
