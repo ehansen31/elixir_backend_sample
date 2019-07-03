@@ -6,6 +6,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
     alias ElixirBackendSampleWeb.EctoSchema.Content
     alias ElixirBackendSampleWeb.Schema.ContentTypes
 
+    @spec create_content(%{__struct__: atom}, any) :: {:error, any} | {:ok, any}
     def create_content(user, text) do
         content = Ecto.build_assoc(user, :content, text: text)
 
@@ -24,7 +25,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         from c in ElixirBackendSampleWeb.EctoSchema.Content,
         where: c.id == ^id
 
-        data = Repo.all(query)
+        data = Repo.one(query)
         Logger.warn "get content query is: #{inspect(data)}"
         # check that the content belongs to the authenticated user
         {:ok, data}
@@ -32,7 +33,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
         #     {:ok, data} -> data
         #     {:error, reason} -> {:error, reason}
         #     _->{:error,"content not found"}
-        # end       
+        # end
     end
 
     def get_user_content(id) do

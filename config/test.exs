@@ -16,7 +16,10 @@ config :elixir_backend_sample, ElixirBackendSample.Repo,
   password: "postgres",
   database: "elixir_backend_sample_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  timeout: 600_000,
+  ownership_timeout: 600_000,
+  pool_timeout: 600_000
 
 # Configures Bamboo
 config :elixir_backend_sample, ElixirBackendSample.Mailer,
