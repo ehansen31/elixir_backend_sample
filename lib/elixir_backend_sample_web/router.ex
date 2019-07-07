@@ -18,7 +18,7 @@ defmodule ElixirBackendSampleWeb.Router do
 
   pipeline :api do
     plug(:accepts, ["json"])
-    plug(ElixirBackendSampleWeb.Context)
+    plug(ElixirBackendSampleWeb.GraphQL.Other.Context)
   end
 
   # Other scopes may use custom stacks.
@@ -28,8 +28,8 @@ defmodule ElixirBackendSampleWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api" do
     pipe_through(:api)
-    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: ElixirBackendSampleWeb.Schema)
+    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: ElixirBackendSampleWeb.GraphQL.Schema.Schema)
 
-    forward("/", Absinthe.Plug, schema: ElixirBackendSampleWeb.Schema)
+    forward("/", Absinthe.Plug, schema: ElixirBackendSampleWeb.GraphQL.Schema.Schema)
   end
 end

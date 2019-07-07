@@ -4,7 +4,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
   require Logger
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.EctoSchema.Content
-  alias ElixirBackendSampleWeb.Schema.ContentTypes
+  alias ElixirBackendSampleWeb.GraphQL.Objects.ContentTypes
 
   @spec create_content(%{__struct__: atom}, any) :: {:error, any} | {:ok, any}
   def create_content(user, text) do

@@ -13,7 +13,6 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
       {:error, changeset} -> {:error, changeset}
       {:ok, userObj} -> {:ok, userObj}
     end
-
   end
 
   def login(_parent, args, _resolution) do
@@ -51,7 +50,9 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
       args[:password] != nil ->
         args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))
         args = Map.delete(args, :password)
-      true -> "Default value"
+
+      true ->
+        "Default value"
     end
 
     User.update_user(current_user, args)

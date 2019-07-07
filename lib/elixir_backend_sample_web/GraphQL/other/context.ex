@@ -1,4 +1,4 @@
-defmodule ElixirBackendSampleWeb.Context do
+defmodule ElixirBackendSampleWeb.GraphQL.Other.Context do
   @behaviour Plug
 
   import Plug.Conn

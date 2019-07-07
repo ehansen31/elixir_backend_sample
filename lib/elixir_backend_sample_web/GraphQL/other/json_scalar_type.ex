@@ -1,4 +1,4 @@
-defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
+defmodule ElixirBackendSampleWeb.GraphQL.Other.JSON_Scalar_Type do
   use Absinthe.Schema.Notation
 
   scalar :json, name: "Json" do
@@ -7,12 +7,13 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     character sequences. The Json type is most often used to represent a free-form
     human-readable json string.
     """)
+
     serialize(&encode/1)
     parse(&decode/1)
   end
 
-  @spec decode(Absinthe.Blueprint.Input.String.t) :: {:ok, :string} | :error
-  @spec decode(Absinthe.Blueprint.Input.Null.t) :: {:ok, nil}
+  @spec decode(Absinthe.Blueprint.Input.String.t()) :: {:ok, :string} | :error
+  @spec decode(Absinthe.Blueprint.Input.Null.t()) :: {:ok, nil}
   defp decode(%Absinthe.Blueprint.Input.String{value: value}) do
     case Poison.decode(value) do
       {:ok, result} -> {:ok, result}
@@ -29,22 +30,4 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
   end
 
   defp encode(value), do: value
-
-
-  object :user do
-    field(:id, :id)
-    field(:email, :string)
-    field(:password, :string)
-    field(:first_name, :string)
-    field(:last_name, :string)
-    field(:age, :integer)
-    field(:client_store, :json)
-  end
-
-  object :content do
-    field(:id, :id)
-    field(:user_id, :id)
-    field(:text, :string)
-  end
-
 end
