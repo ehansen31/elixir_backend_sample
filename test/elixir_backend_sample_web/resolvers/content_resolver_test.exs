@@ -47,30 +47,32 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
         |> put_req_header("authorization", token)
         |> post("/api", query)
 
-      # test fails due to testing library limitations
       assert json_response(res, 200)["data"]["getContent"]["text"]
     end
 
-    # test "get all content for a user", context do
-    #     {:ok, token} = TestHelper.register_login_getToken()
+    test "get all content for a user", context do
+      {:ok, token} = TestHelper.register_login_getToken()
 
-    #     query = """
-    #         query{
-    #             getAllUserContent(){
-    #                 text
-    #             }
-    #         }
-    #     """
+      TestHelper.create_content_return_id(token)
+      TestHelper.create_content_return_id(token)
+      TestHelper.create_content_return_id(token)
 
-    #     res =
-    #     build_conn()
-    #       |> put_req_header("content-type", "text")
-    #       |> put_req_header("authorization", token)
-    #       |> post("/api", query)
+        query = """
+            query{
+                getAllUserContent{
+                    id,
+                    text
+                }
+            }
+        """
 
-    #     Logger.warn "get all user content response body: " <> res.resp_body
+        res =
+        build_conn()
+          |> put_req_header("content-type", "text")
+          |> put_req_header("authorization", token)
+          |> post("/api", query)
 
-    #     assert json_response(res, 200)["data"]["getAllUserContent"]["id"]
-    # end
+        assert json_response(res, 200)["data"]["getAllUserContent"]["id"]
+    end
   end
 end

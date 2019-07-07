@@ -31,30 +31,18 @@ defmodule ElixirBackendSampleWeb.Models.Content do
 
     data = Repo.one(query)
     {:ok, data}
-
-    # case Repo.one(query) do
-    #   {:ok, data} -> {:ok, data}
-    #   {:error, reason} -> {:error, reason}
-    #   _ -> {:error, "content not found"}
-    # end
   end
 
   def get_user_content(id) do
-    Logger.warn("made it to model")
-
     query =
-      from(
-        c in ElixirBackendSampleWeb.EctoSchema.Content,
-        where: c.user_id == ^id,
-        preload: [:user]
+      from(c in ElixirBackendSampleWeb.EctoSchema.Content,
+        join: user in assoc(c, :user),
+        where: user.id == ^id,
+        preload: [user: user]
       )
 
-    Logger.warn("get all user content query is: ")
-    IO.inspect(query)
-
     data = Repo.all(query)
-    Logger.warn("get all user content data is: ")
-    IO.inspect(data)
+    {:ok, data}
   end
 
   def update_content(content, args) do
