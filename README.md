@@ -4,15 +4,12 @@ Sample project to be used going forward as a baseline API for quick POC's and ot
 
 ---
 #### TODO:
-* refactor gql schema organization into multiple files
-* rename schema folder and differentiate ecto models vs gql data models
 * Cron Jobs
   * Welcome email on signup?
 * add logging
 * email validation
 * unit test mock database populated on run time
 * model changesets for data validation
-* reorganize graphql directory structure
 
 ## Features include:
   * Elixir functional programming language
