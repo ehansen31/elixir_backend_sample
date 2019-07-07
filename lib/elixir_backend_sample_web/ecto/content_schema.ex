@@ -3,7 +3,7 @@ defmodule ElixirBackendSampleWeb.Ecto.Content_Schema do
   import Ecto.Changeset
 
   schema "content" do
-      belongs_to(:user, ElixirBackendSampleWeb.Ecto.User_Schema)
+      belongs_to(:user, ElixirBackendSampleWeb.Ecto.User)
       field(:text, :string)
       timestamps
   end

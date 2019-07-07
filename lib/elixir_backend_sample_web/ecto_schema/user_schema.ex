@@ -1,4 +1,4 @@
-defmodule ElixirBackendSampleWeb.Ecto.User do
+defmodule ElixirBackendSampleWeb.EctoSchema.User do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,10 +9,14 @@ defmodule ElixirBackendSampleWeb.Ecto.User do
     field(:last_name, :string)
     field(:age, :integer)
     field(:client_store, :map)
-    has_many(:content, ElixirBackendSampleWeb.Ecto.Content_Schema)
+    has_many(:content, ElixirBackendSampleWeb.EctoSchema.Content_Schema)
     timestamps
   end
 
+  @spec changeset(
+          {map, map} | %{:__struct__ => atom, optional(atom) => any},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: Ecto.Changeset.t()
   def changeset(user, params \\ %{}) do
       user
       |> cast(params, [:email, :password_hash])

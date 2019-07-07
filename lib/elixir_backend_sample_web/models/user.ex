@@ -2,10 +2,10 @@ defmodule ElixirBackendSampleWeb.Models.User do
   import Ecto.Query
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
-  alias ElixirBackendSampleWeb.Ecto.User_Schema
+  alias ElixirBackendSampleWeb.Ecto.User
 
   def create_user(args) do
-    changeset = User_Schema.changeset(%User_Schema{}, args)
+    changeset = User.changeset(%User{}, args)
 
     case Repo.insert(changeset) do
       {:error, changeset} -> {:error, changeset}
@@ -16,7 +16,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
   def get_user(id) do
     query =
       from(
-        u in ElixirBackendSampleWeb.Ecto.User_Schema,
+        u in ElixirBackendSampleWeb.Ecto.User,
         where: u.id == ^id
       )
 
@@ -25,7 +25,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   defp authenticate_user(email, given_password) do
     query =
-      Ecto.Query.from(u in ElixirBackendSampleWeb.Ecto.User_Schema, where: u.email == ^email)
+      Ecto.Query.from(u in ElixirBackendSampleWeb.Ecto.User, where: u.email == ^email)
 
     Repo.one(query)
     |> check_password(given_password)
@@ -54,7 +54,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
 
   def reset_password(args) do
     query =
-      Ecto.Query.from(u in ElixirBackendSampleWeb.Ecto.User_Schema, where: u.email == ^args.email)
+      Ecto.Query.from(u in ElixirBackendSampleWeb.Ecto.User, where: u.email == ^args.email)
 
     user = Repo.one(query)
 
