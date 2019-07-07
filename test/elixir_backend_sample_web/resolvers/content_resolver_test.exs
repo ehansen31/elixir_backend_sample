@@ -72,7 +72,7 @@ defmodule ElixirBackendSampleWeb.ContentResolverTest do
           |> put_req_header("authorization", token)
           |> post("/api", query)
 
-        assert json_response(res, 200)["data"]["getAllUserContent"]["id"]
+        assert length(json_response(res, 200)["data"]["getAllUserContent"]) == 3
     end
   end
 end
