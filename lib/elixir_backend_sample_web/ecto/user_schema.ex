@@ -1,4 +1,4 @@
-defmodule ElixirBackendSampleWeb.Ecto.User do
+defmodule ElixirBackendSampleWeb.Ecto.User_Schema do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,7 +9,7 @@ defmodule ElixirBackendSampleWeb.Ecto.User do
     field(:last_name, :string)
     field(:age, :integer)
     field(:client_store, :map)
-    has_many(:content, ElixirBackendSampleWeb.Ecto.Content_Schema)
+    has_many(:content, ElixirBackendSampleWeb.Ecto.Content_Schema, foreign_key: :user_id)
     timestamps
   end
 
