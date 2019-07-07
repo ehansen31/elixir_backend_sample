@@ -1,23 +1,14 @@
 defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
-  def create_user(_parent, args, _resolution) do
-    # alias ElixirBackendSampleWeb.Models.User
-    alias ElixirBackendSampleWeb.EctoSchema.User
-    alias ElixirBackendSample.Repo
+  alias ElixirBackendSampleWeb.Models.User
 
+  def create_user(_parent, args, _resolution) do
     args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))
     args = Map.delete(args, :password)
 
-    changeset = User.changeset(%User{}, args)
-
-    case Repo.insert(changeset) do
-      {:error, changeset} -> {:error, changeset}
-      {:ok, userObj} -> {:ok, userObj}
-    end
+    User.create_user(args)
   end
 
   def login(_parent, args, _resolution) do
-    alias ElixirBackendSampleWeb.Models.User
-
     User.login(args)
   end
 
@@ -38,14 +29,10 @@ defmodule ElixirBackendSampleWeb.Resolvers.User_Resolver do
   end
 
   def reset_password(_parent, args, _resolution) do
-    alias ElixirBackendSampleWeb.Models.User
-
     User.reset_password(args)
   end
 
   def update_user(_parent, args, %{context: %{current_user: current_user}}) do
-    alias ElixirBackendSampleWeb.Models.User
-
     cond do
       args[:password] != nil ->
         args = Map.put(args, :password_hash, Comeonin.Bcrypt.hashpwsalt(args.password))

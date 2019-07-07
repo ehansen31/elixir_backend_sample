@@ -1,10 +1,6 @@
 defmodule ElixirBackendSampleWeb.Models.Content do
-  import Ecto.Changeset
   import Ecto.Query
-  require Logger
   alias ElixirBackendSample.Repo
-  alias ElixirBackendSampleWeb.EctoSchema.Content
-  alias ElixirBackendSampleWeb.GraphQL.Objects.ContentTypes
 
   @spec create_content(%{__struct__: atom}, any) :: {:error, any} | {:ok, any}
   def create_content(user, text) do
@@ -17,13 +13,11 @@ defmodule ElixirBackendSampleWeb.Models.Content do
       {:ok, contentObj} ->
         {:ok, contentObj}
     end
-
-    # val
   end
 
   def get_content(userObj, id) do
     query =
-      from(c in ElixirBackendSampleWeb.EctoSchema.Content,
+      from(c in ElixirBackendSampleWeb.Ecto.Content_Schema,
         join: user in assoc(c, :user),
         where: c.id == ^id and user.id == ^userObj.id,
         preload: [user: user]
@@ -35,7 +29,7 @@ defmodule ElixirBackendSampleWeb.Models.Content do
 
   def get_user_content(id) do
     query =
-      from(c in ElixirBackendSampleWeb.EctoSchema.Content,
+      from(c in ElixirBackendSampleWeb.Ecto.Content_Schema,
         join: user in assoc(c, :user),
         where: user.id == ^id,
         preload: [user: user]

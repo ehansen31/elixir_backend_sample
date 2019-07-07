@@ -1,16 +1,22 @@
 defmodule ElixirBackendSampleWeb.Models.User do
-  alias ElixirBackendSampleWeb.EctoSchema.User
-
   import Ecto.Query
-
   alias ElixirBackendSample.Repo
   alias ElixirBackendSampleWeb.Email
+  alias ElixirBackendSampleWeb.Ecto.User_Schema
+
+  def create_user(args) do
+    changeset = User_Schema.changeset(%User_Schema{}, args)
+
+    case Repo.insert(changeset) do
+      {:error, changeset} -> {:error, changeset}
+      {:ok, userObj} -> {:ok, userObj}
+    end
+  end
 
   def get_user(id) do
-    # Create a query
     query =
       from(
-        u in ElixirBackendSampleWeb.EctoSchema.User,
+        u in ElixirBackendSampleWeb.Ecto.User_Schema,
         where: u.id == ^id
       )
 
@@ -18,7 +24,8 @@ defmodule ElixirBackendSampleWeb.Models.User do
   end
 
   defp authenticate_user(email, given_password) do
-    query = Ecto.Query.from(u in ElixirBackendSampleWeb.EctoSchema.User, where: u.email == ^email)
+    query =
+      Ecto.Query.from(u in ElixirBackendSampleWeb.Ecto.User_Schema, where: u.email == ^email)
 
     Repo.one(query)
     |> check_password(given_password)
@@ -46,22 +53,23 @@ defmodule ElixirBackendSampleWeb.Models.User do
   end
 
   def reset_password(args) do
-
-    query = Ecto.Query.from(u in ElixirBackendSampleWeb.EctoSchema.User, where: u.email == ^args.email)
+    query =
+      Ecto.Query.from(u in ElixirBackendSampleWeb.Ecto.User_Schema, where: u.email == ^args.email)
 
     user = Repo.one(query)
 
-    new_password = :crypto.strong_rand_bytes(12) |> Base.url_encode64 |> binary_part(0, 12)
+    new_password = :crypto.strong_rand_bytes(12) |> Base.url_encode64() |> binary_part(0, 12)
 
     hashed_password = Comeonin.Bcrypt.hashpwsalt(new_password)
 
     user_changeset = Ecto.Changeset.change(user, password_hash: hashed_password)
-    case Repo.update user_changeset do
+
+    case Repo.update(user_changeset) do
       {:error, changeset} -> {:error, changeset}
       {:ok, changeset} -> user_changeset = changeset
     end
 
-    Email.password_reset_email(user, new_password) |> ElixirBackendSample.Mailer.deliver_later
+    Email.password_reset_email(user, new_password) |> ElixirBackendSample.Mailer.deliver_later()
 
     {:ok, "success"}
   end
@@ -69,7 +77,7 @@ defmodule ElixirBackendSampleWeb.Models.User do
   def update_user(user, args) do
     updated_user = Ecto.Changeset.change(user, args)
 
-    case Repo.update updated_user do
+    case Repo.update(updated_user) do
       {:error, changeset} -> {:error, changeset}
       {:ok, changeset} -> {:ok, changeset}
     end
