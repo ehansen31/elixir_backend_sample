@@ -45,8 +45,6 @@ defmodule ElixirBackendSampleWeb.Schema.ContentTypes do
     field(:id, :id)
     field(:user_id, :id)
     field(:text, :string)
-    # field(:text, :string)
-    # field(:image, :string)
   end
 
 end
